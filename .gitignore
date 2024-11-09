@@ -1,1 +1,10 @@
-bin, obj, *.dll
+bin, obj, *.dll, *.exe
+/AutoBattle/bin
+/AutoBattle/obj
+/CSLib/bin
+/CSLib/obj
+/KazApi.NET/bin
+/KazApi.NET/obj
+/TestRun/bin
+/TestRun/obj
+/KazApi.NET/.vs

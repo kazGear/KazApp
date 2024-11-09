@@ -1,0 +1,2 @@
+﻿// api URL
+https://localhost:7234/api/Tmp
