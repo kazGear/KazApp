@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestRun", "..\TestRun\TestR
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSLib", "..\CSLib\CSLib.csproj", "{5DC4C7E8-D403-4961-841D-4957EE43A189}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoBattle", "..\AutoBattle\AutoBattle.csproj", "{D5C014E8-A886-4D23-8673-00B9054F43C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoBattle", "..\AutoBattle\AutoBattle.csproj", "{D5C014E8-A886-4D23-8673-00B9054F43C8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Batch", "Batch", "{E6A8B7B5-74E3-4185-9DB2-3EACDD86996B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +38,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D5C014E8-A886-4D23-8673-00B9054F43C8} = {E6A8B7B5-74E3-4185-9DB2-3EACDD86996B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {082E8929-9A9C-4032-B84F-C8F378339FC3}
