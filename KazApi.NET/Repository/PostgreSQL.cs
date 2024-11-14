@@ -6,7 +6,10 @@ namespace KazApi.Repository
 {
     public class PostgreSQL : IDisposable, IDatabase
     {
-        private static readonly string CONNECTION_STRING = "Server=localhost;Port=5432;User Id=postgres;Password=kaz_5050;Database=kaz_app";
+        // ローカル
+        //private static readonly string CONNECTION_STRING = "Server=localhost;Port=5432;User Id=postgres;Password=kaz_5050;Database=kaz_app";
+        // リモート
+        private static readonly string CONNECTION_STRING = "Server=try-the-work.net;Port=5432;User Id=postgres;Password=kaz_5050;Database=kaz_app";
         private IDbConnection Connection { get; set; }
         private IDbTransaction Transaction { get; set; }
 

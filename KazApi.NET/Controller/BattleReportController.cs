@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using KazApi.Common._Log;
 using KazApi.Service;
 using KazApi.DTO;
 
@@ -9,12 +8,21 @@ namespace KazApi.Controller
     [ApiController]
     public class BattleReportController : ControllerBase
     {
-        private readonly ILog<BattleMetaData> _logger;
         private readonly BattleReportService _service;
 
         public BattleReportController(IConfiguration configuration)
         {
+            Console.WriteLine("コントローラ起動 BattleReportController");
             _service = new BattleReportService(configuration);
+        }
+
+        [HttpOptions("/api/*")]
+        public IActionResult Preflight()
+        {
+            Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            Response.Headers.Add("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+            Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Authorization");
+            return NoContent();
         }
 
         /// <summary>
@@ -42,6 +50,7 @@ namespace KazApi.Controller
         {
             try
             {
+                Console.WriteLine("リクエスト到達 api/battleReport/monsterReport");
                 IEnumerable<MonsterRepostDTO> monsterReports = _service.SelectMonsterReport(monsterTypeId);
                 return JsonConvert.SerializeObject(monsterReports);
             }

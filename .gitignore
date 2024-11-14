@@ -8,3 +8,4 @@ bin, obj, *.dll, *.exe
 /TestRun/bin
 /TestRun/obj
 /KazApi.NET/.vs
+/KazApi.NET/build

@@ -9,9 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestRun", "..\TestRun\TestR
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSLib", "..\CSLib\CSLib.csproj", "{5DC4C7E8-D403-4961-841D-4957EE43A189}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoBattle", "..\AutoBattle\AutoBattle.csproj", "{D5C014E8-A886-4D23-8673-00B9054F43C8}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Batch", "Batch", "{E6A8B7B5-74E3-4185-9DB2-3EACDD86996B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoBattle", "..\AutoBattle\AutoBattle.csproj", "{3C3E2AE7-351D-4531-98A0-ECBAE6015303}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,16 +29,13 @@ Global
 		{5DC4C7E8-D403-4961-841D-4957EE43A189}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DC4C7E8-D403-4961-841D-4957EE43A189}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DC4C7E8-D403-4961-841D-4957EE43A189}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D5C014E8-A886-4D23-8673-00B9054F43C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D5C014E8-A886-4D23-8673-00B9054F43C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D5C014E8-A886-4D23-8673-00B9054F43C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D5C014E8-A886-4D23-8673-00B9054F43C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C3E2AE7-351D-4531-98A0-ECBAE6015303}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C3E2AE7-351D-4531-98A0-ECBAE6015303}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C3E2AE7-351D-4531-98A0-ECBAE6015303}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C3E2AE7-351D-4531-98A0-ECBAE6015303}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{D5C014E8-A886-4D23-8673-00B9054F43C8} = {E6A8B7B5-74E3-4185-9DB2-3EACDD86996B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {082E8929-9A9C-4032-B84F-C8F378339FC3}

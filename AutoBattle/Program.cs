@@ -5,6 +5,7 @@ using KazApi.Service;
 using KazApi.Domain._Monster._State;
 using KazApi.Lib;
 using KazApi.DTO;
+using System.Text;
 
 Console.WriteLine("Auto battle start...");
 
@@ -12,11 +13,13 @@ IDatabase _posgre = new PostgreSQL();
 BattleService _service = new BattleService();
 
 
-// ３戦行う
-for (int i = 0; i < 3; i++)
+int battleTimes = 3;
+for (int i = 0; i < battleTimes; i++)
 {
     try
     {
+        Console.OutputEncoding = Encoding.UTF8;
+
         /**
          * モンスタ－用意
          */
@@ -82,21 +85,21 @@ for (int i = 0; i < 3; i++)
                 me.UpdateStatus(changedStatus);
 
                 // HP 現状確認
-                Console.WriteLine("================================================================");
+                // Console.Writeline("================================================================");
                 foreach (IMonster monster in battleMonsters)
                 {
                     int hp = monster.Hp > 0 ? monster.Hp : 0;
-                    Console.WriteLine($"name: {monster.MonsterName}, HP: {hp}");
+                    // Console.Writeline($"name: {monster.MonsterName}, HP: {hp}");
                 }
 
                 // 勝敗判定
                 alives = battleMonsters.Where(e => e.Hp > 0);
                 IMonster? alive = alives.Count() == 1 ? alives.Single() : null;
 
-                if (alives.Count() == 1)
-                    Console.WriteLine($"Winner: {alive!.MonsterName} !!");
-                else if (alives.Count() == 0)
-                    Console.WriteLine($"All loser ...");
+                //if (alives.Count() == 1)
+                //    Console.Writeline($"Winner: {alive!.MonsterName} !!");
+                //else if (alives.Count() == 0)
+                //    Console.Writeline($"All loser ...");
 
             }
         } while (alives.Count() > 1);
@@ -119,7 +122,7 @@ for (int i = 0; i < 3; i++)
         if (i < 2)
         {
             await Task.Delay(120000);
-            Console.WriteLine("再選待ち...(2分)");
+            // Console.Writeline("再選待ち...(2分)");
         }
     }
     catch (Exception e)
@@ -127,4 +130,6 @@ for (int i = 0; i < 3; i++)
         Console.WriteLine("batch [AutoBattle] が異常終了しました。");
         Console.WriteLine(e);
     }
+
 }
+Console.WriteLine($"Auto battle finish. （{battleTimes}戦）");

@@ -9,6 +9,8 @@ using KazApi.Domain._Monster._State;
 using KazApi.DTO;
 using KazApi.Repository;
 using KazApi.Service;
+using System.Net;
+using System.Runtime.InteropServices;
 
 /*
  print util
@@ -19,11 +21,35 @@ void PrintAll<T>(IEnumerable<T> os)
     foreach (T o in os) Console.WriteLine(o!.ToString());
 }
 
-
 /************************************************************
  * 
- * バトル・テストエリア
+ * 汎用テストエリア
  * 
+ ************************************************************/
+
+bool doTest = true; // テスト稼働可否
+if (!doTest) return;
+Print(">>> test info.");
+
+UTimeMeasure.Start();
+
+Print(RuntimeInformation.OSArchitecture);
+Print(RuntimeInformation.OSDescription);
+Print(RuntimeInformation.RuntimeIdentifier);
+Print(RuntimeInformation.FrameworkDescription);
+Print(RuntimeInformation.ProcessArchitecture);
+
+
+
+
+
+Print(UTimeMeasure.Stop());
+Print(">>> test end...");
+
+/************************************************************
+ * **********************************************************
+ * バトル・テストエリア
+ * **********************************************************
  ************************************************************/
 
 // オブジェクト構築
@@ -176,25 +202,3 @@ catch (Exception e)
     Print(e.Message);
     Print(e.InnerException!);
 }
-
-/************************************************************
- * 
- * 汎用テストエリア
- * 
- ************************************************************/
-
-bool doTest = true; // テスト稼働可否
-if (!doTest) return;
-Print(">>> test info.");
-
-UTimeMeasure.Start();
-
-
-
-Print((1.0 / 3.0));
-Print((1.0 / 3.0).ToString("N2"));
-Print((1.0 / 3.0 * 100).ToString("N2") + "%");
-
-
-
-Print(UTimeMeasure.Stop());
