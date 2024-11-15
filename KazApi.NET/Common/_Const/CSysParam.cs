@@ -1,5 +1,21 @@
 ﻿namespace KazApi.Common._Const
 {
+    public static class CEnvironment
+    {
+        /// <summary>
+        /// 開発、ローカル環境
+        /// </summary>
+        public static readonly bool DEVELOPMENT = false;
+        /// <summary>
+        /// リモートサーバ、公開、本番
+        /// </summary>
+        public static readonly bool PRODUCTION = true;
+        /// <summary>
+        /// 現環境を決定 false: 開発, true: 本番
+        /// </summary>
+        public static readonly bool THIS_ENVIRONMENT = PRODUCTION;
+    }
+
     /// <summary>
     /// 補正率クラス
     /// </summary>

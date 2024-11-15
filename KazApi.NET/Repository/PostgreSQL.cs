@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using KazApi.Common._Const;
 using Npgsql;
 using System.Data;
 
@@ -6,10 +7,8 @@ namespace KazApi.Repository
 {
     public class PostgreSQL : IDisposable, IDatabase
     {
-        // ローカル
-        //private static readonly string CONNECTION_STRING = "Server=localhost;Port=5432;User Id=postgres;Password=kaz_5050;Database=kaz_app";
-        // リモート
-        private static readonly string CONNECTION_STRING = "Server=try-the-work.net;Port=5432;User Id=postgres;Password=kaz_5050;Database=kaz_app";
+        private static readonly string CONNECTION_STRING_LOCAL = "Server=localhost;Port=5432;User Id=postgres;Password=kaz_5050;Database=kaz_app";
+        private static readonly string CONNECTION_STRING_REMOTE = "Server=try-the-work.net;Port=5432;User Id=postgres;Password=kaz_5050;Database=kaz_app";
         private IDbConnection Connection { get; set; }
         private IDbTransaction Transaction { get; set; }
 
@@ -18,11 +17,17 @@ namespace KazApi.Repository
         /// </summary>
         public PostgreSQL(IConfiguration configuration)
         {
-            Connection = new NpgsqlConnection(configuration["ConnectionStrings:DefaultConnection"]);
+            if (CEnvironment.THIS_ENVIRONMENT)
+                Connection = new NpgsqlConnection(configuration["ConnectionStrings:Remote"]);
+            else
+                Connection = new NpgsqlConnection(configuration["ConnectionStrings:Local"]);
         }
         public PostgreSQL()
         {
-            Connection = new NpgsqlConnection(CONNECTION_STRING);
+            if (CEnvironment.THIS_ENVIRONMENT)
+                Connection = new NpgsqlConnection(CONNECTION_STRING_REMOTE);
+            else
+                Connection = new NpgsqlConnection(CONNECTION_STRING_LOCAL);
         }
 
         /// <summary>

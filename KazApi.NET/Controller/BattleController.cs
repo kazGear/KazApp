@@ -23,7 +23,11 @@ namespace KazApi.Controller
             _service = new BattleService(configuration);
         }
 
-        [HttpOptions("/api/*")]
+        /// <summary>
+        /// CORS対策
+        /// </summary>
+
+        [HttpOptions("api/*")]
         public IActionResult Preflight()
         {
             Response.Headers.Add("Access-Control-Allow-Origin", "*");

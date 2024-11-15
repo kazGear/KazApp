@@ -1,6 +1,4 @@
-﻿using KazApi.Domain._User;
-using KazApi.Repository;
-using Microsoft.AspNetCore.Http.Extensions;
+﻿using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 using Newtonsoft.Json;
@@ -24,39 +22,40 @@ namespace KazApi.Domain
         {
             Console.WriteLine($"GetTemp. アクセスあり at {DateTime.Now}");
 
-            string url = Request.GetDisplayUrl();
-            QueryString query = Request.QueryString;
+            //string url = Request.GetDisplayUrl();
+            //QueryString query = Request.QueryString;
 
-            string? connectionStr = _appsettings["ConnectionStrings:DefaultConnection"];
+            //string? connectionStr = _appsettings["ConnectionStrings:DefaultConnection"];
 
-            string select = @"
-                SELECT
-                       username
-                     , password
-                     , money
-                     , hp
-                     , mp
-                     , attack
-                     , defense
-                     , is_invalid as IsInvalid 
-                  FROM
-                       users ;
-            ";
+            //string select = @"
+            //    SELECT
+            //           username
+            //         , password
+            //         , money
+            //         , hp
+            //         , mp
+            //         , attack
+            //         , defense
+            //         , is_invalid as IsInvalid 
+            //      FROM
+            //           users ;
+            //";
 
-            IDatabase postgre = new PostgreSQL(_appsettings);
-            IEnumerable<IUser> users = postgre.Select<IUser>(select);
+            //IDatabase postgre = new PostgreSQL(_appsettings);
+            //IEnumerable<IUser> users = postgre.Select<IUser>(select);
 
-            //users = users.Where(e => e.IsInvalid == false);
+            ////users = users.Where(e => e.IsInvalid == false);
 
-            string userNames = "";
-            foreach (IUser user in users)
-            {
-                userNames += $"{user}, ";
-            }
+            //string userNames = "";
+            //foreach (IUser user in users)
+            //{
+            //    userNames += $"{user}, ";
+            //}
 
-            string json2 = JsonConvert.SerializeObject(users);
-            Console.WriteLine(json2);
-            return json2;
+            //string json2 = JsonConvert.SerializeObject(users);
+            //Console.WriteLine(json2);
+            //return json2;
+            return JsonConvert.SerializeObject("{ \"a\": 1, \"b\": 2}");
         }
 
         

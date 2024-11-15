@@ -12,11 +12,14 @@ namespace KazApi.Controller
 
         public BattleReportController(IConfiguration configuration)
         {
-            Console.WriteLine("コントローラ起動 BattleReportController");
             _service = new BattleReportService(configuration);
         }
 
-        [HttpOptions("/api/*")]
+        /// <summary>
+        /// CORS対策
+        /// </summary>
+
+        [HttpOptions("api/*")]
         public IActionResult Preflight()
         {
             Response.Headers.Add("Access-Control-Allow-Origin", "*");
@@ -50,7 +53,6 @@ namespace KazApi.Controller
         {
             try
             {
-                Console.WriteLine("リクエスト到達 api/battleReport/monsterReport");
                 IEnumerable<MonsterRepostDTO> monsterReports = _service.SelectMonsterReport(monsterTypeId);
                 return JsonConvert.SerializeObject(monsterReports);
             }

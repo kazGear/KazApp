@@ -9,6 +9,7 @@ using KazApi.Domain._Monster._State;
 using KazApi.DTO;
 using KazApi.Repository;
 using KazApi.Service;
+using Microsoft.EntityFrameworkCore.Storage.Json;
 using System.Net;
 using System.Runtime.InteropServices;
 
@@ -33,15 +34,16 @@ Print(">>> test info.");
 
 UTimeMeasure.Start();
 
-Print(RuntimeInformation.OSArchitecture);
-Print(RuntimeInformation.OSDescription);
-Print(RuntimeInformation.RuntimeIdentifier);
-Print(RuntimeInformation.FrameworkDescription);
-Print(RuntimeInformation.ProcessArchitecture);
 
+Print(OSPlatform.Windows);
+Print(OSPlatform.OSX);
+Print(OSPlatform.Linux);
 
+Print(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "windows" : "?");
+Print(RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? "OSX" : "?");
+Print(RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? "Linux" : "?");
 
-
+Print(UEnvironment.IsRuntime());
 
 Print(UTimeMeasure.Stop());
 Print(">>> test end...");

@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Builder;
 using System.Net;
 
 public class Program
@@ -42,12 +43,19 @@ public class Startup
     {
         services.AddCors(options =>
         {
-            options.AddDefaultPolicy(builder =>
-                builder.WithOrigins("https://try-the-work.net")
-                       .AllowAnyMethod()
-                       .AllowAnyHeader());
+            options.AddPolicy("AllowAll",
+                builder =>
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader());
         });
-        services.AddControllers();
+        services.AddControllers().
+                 AddJsonOptions(options =>
+        {
+            options.JsonSerializerOptions.Encoder 
+                = System.Text.Encodings.Web.JavaScriptEncoder.Create(
+                    System.Text.Unicode.UnicodeRanges.All);
+        });
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
@@ -60,21 +68,27 @@ public class Startup
         {
             //app.UseExceptionHandler("/Home/Error");
             app.UseHsts();
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
         }
 
         app.UseStaticFiles();
-
         app.UseRouting();
+        app.UseCors("AllowAll");
 
-        app.UseCors();
-        
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapControllers();
+            endpoints.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
             //endpoints.MapFallbackToFile("/index.html");
+        });
+        app.Use(async (context, next) =>
+        {
+            context.Response.Headers.Add("Content-Type", "application/json; charset=utf-8");
+            await next();
         });
     }
 }
