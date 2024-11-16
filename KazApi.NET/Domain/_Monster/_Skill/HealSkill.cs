@@ -18,7 +18,7 @@ namespace KazApi.Domain._Monster._Skill
 
         public override void Use(IEnumerable<IMonster> monsters, IMonster me)
         {
-            int healPoint = URandom.RandomChangeInt(base.Attack, CSysRate.MAGIC_SKILL_DAMAGE);
+            int healPoint = URandom.RandomChangeInt(base.Attack, CSysRate.MAGIC_SKILL_DAMAGE.VALUE);
 
             // MaxHp以上に回復はできない
             int healAble = me.MaxHp - me.Hp;

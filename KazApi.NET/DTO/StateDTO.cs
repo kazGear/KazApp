@@ -27,7 +27,7 @@ namespace KazApi.DTO
         /// </summary>
         public StateDTO(IState model)
         {
-            Category = (int)CCodeType.STATE;
+            Category = CCodeType.STATE.VALUE;
             StateType = model.StateType;
             Name = model.Name;
             MaxDuration = model.MaxDuration;

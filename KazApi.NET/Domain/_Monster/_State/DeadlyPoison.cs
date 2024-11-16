@@ -18,7 +18,7 @@ namespace KazApi.Domain._Monster._State
         public DeadlyPoison(string name, int stateType, int maxDuration)
                      : base(name, stateType, maxDuration)
         {
-            base.StateType = ((int)CStateType.POISON);
+            base.StateType = CStateType.POISON.VALUE;
         }
 
         public override IState DeepCopy()

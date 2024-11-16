@@ -1,42 +1,47 @@
 ﻿namespace KazApi.Common._Const
 {
-    public enum CTarget
+    public class CTarget : Enumeration<int>
     {
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        private CTarget(int id, string name) : base(id, name) { }
+
         /// <summary>
         /// 無し
         /// </summary>
-        NONE,
+        public static readonly CTarget NONE = new(0, "NONE");     
         /// <summary>
         /// 敵ランダム
         /// </summary>
-        ENEMY_RANDOM,
+        public static readonly CTarget ENEMY_RANDOM = new (1, "ENEMY_RANDOM");
         /// <summary>
         /// 敵全体
         /// </summary>
-        ENEMY_ALL,
+        public static readonly CTarget ENEMY_ALL = new (2, "ENEMY_ALL");
         /// <summary>
         /// 敵ランダム・敵全体
         /// </summary>
-        ENEMY_RANDOM_OR_ALL,
+        public static readonly CTarget ENEMY_RANDOM_OR_ALL = new (3, "ENEMY_RANDOM_OR_ALL");
         /// <summary>
         /// 敵ランダム・複数回
         /// </summary>
-        ENEMY_RANDOM_SOME_TIMES,
+        public static readonly CTarget ENEMY_RANDOM_SOME_TIMES = new (4, "ENEMY_RANDOM_SOME_TIMES");
         /// <summary>
         /// 自身
         /// </summary>
-        ME,
+        public static readonly CTarget ME = new (5, "ME");
         /// <summary>
         /// 味方ランダム
         /// </summary>
-        FRIEND_RANDOM,
+        public static readonly CTarget FRIEND_RANDOM = new (6, "FRIEND_RANDOM");
         /// <summary>
         /// 味方全体
         /// </summary>
-        FRIEND_ALL,
+        public static readonly CTarget FRIEND_ALL = new (7, "FRIEND_ALL");
         /// <summary>
         /// 味方ランダム・味方全体
         /// </summary>
-        FRIEND_RANDOM_OR_ALL
+        public static readonly CTarget FRIEND_RANDOM_OR_ALL = new (8, "FRIEND_RANDOM_OR_ALL");
     }
 }

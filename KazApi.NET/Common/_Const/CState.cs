@@ -5,44 +5,50 @@ namespace KazApi.Common._Const
     /// <summary>
     /// 状態定数
     /// </summary>
-    public enum CStateType
+    public class CStateType : Enumeration<int>
     {
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        private CStateType(int id, string name) : base(id, name) { }
+
         /// <summary>
         /// 無し
         /// </summary>
-        NONE,
+        public static readonly CStateType NONE = new(0, "通常");
         /// <summary>
         /// 毒状態
         /// </summary>
-        POISON,
+        public static readonly CStateType POISON = new(1, "毒");
         /// <summary>
         /// 睡眠
         /// </summary>
-        SLEEP,
+        public static readonly CStateType SLEEP = new(2, "睡眠");
         /// <summary>
         /// 魅了
         /// </summary>
-        CHARM,
+        public static readonly CStateType CHARM = new(3, "魅了");
         /// <summary>
         /// スロー、遅い
         /// </summary>
-        SLOW,
+        public static readonly CStateType SLOW = new(4, "スロー");
         /// <summary>
         /// 攻撃力UP
         /// </summary>
-        POWERUP,
+        public static readonly CStateType POWERUP = new(5, "攻撃力UP");
         /// <summary>
         /// 回避率UP
         /// </summary>
-        DODGEUP,
+        public static readonly CStateType DODGEUP = new(6, "回避率UP");
         /// <summary>
         /// クリティカル率UP
         /// </summary>
-        CRITICALUP,
+        public static readonly CStateType CRITICALUP = new(7, "クリティカルUP");
         /// <summary>
         /// 自動回復
         /// </summary>
-        AUTOHEAL
+        public static readonly CStateType AUTOHEAL = new(8, "自動回復");
+       
     }
 
     /// <summary>

@@ -2,7 +2,6 @@
 using KazApi.Domain._Monster._Skill;
 using KazApi.Domain._Monster._State;
 using KazApi.DTO;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace KazApi.Domain._Factory
 {
@@ -32,40 +31,40 @@ namespace KazApi.Domain._Factory
         {
             CodeDTO param = _codeEntities.Where(e => e.Value == stateCode).Single();
 
-            if (stateCode == ((int)CStateType.NONE))
+            if (stateCode == CStateType.NONE.VALUE)
                 return new None(param.Name, param.Value, param.Param2);
-            else if (stateCode == ((int)CStateType.POISON))
+            else if (stateCode == CStateType.POISON.VALUE)
                 return new Poison(param.Name, param.Value, param.Param2);
-            else if (stateCode == ((int)CStateType.SLEEP))
+            else if (stateCode == CStateType.SLEEP.VALUE)
                 return new Sleep(param.Name, param.Value, param.Param2);
-            else if (stateCode == ((int)CStateType.CHARM))
+            else if (stateCode == CStateType.CHARM.VALUE)
                 return new Charm(param.Name, param.Value, param.Param2);
-            else if (stateCode == ((int)CStateType.SLOW))
+            else if (stateCode == CStateType.SLOW.VALUE)
             {
                 Console.WriteLine($"対応していないコードです：{CStateType.SLOW}");
                 return new None(param.Name, param.Value, param.Param2);
             }
 
             //    return new Slow(param.Name, param.Value, param.Param2);
-            else if (stateCode == ((int)CStateType.POWERUP))
+            else if (stateCode == CStateType.POWERUP.VALUE)
             {
                 Console.WriteLine($"対応していないコードです：{CStateType.POWERUP}");
                 return new None(param.Name, param.Value, param.Param2);
             }
             //    return new PowerUp(param.Name, param.Value, param.Param2);
-            else if (stateCode == ((int)CStateType.DODGEUP))
+            else if (stateCode == CStateType.DODGEUP.VALUE)
             {
                 Console.WriteLine($"対応していないコードです：{CStateType.DODGEUP}");
                 return new None(param.Name, param.Value, param.Param2);
             }
             //    return new DodgeUp(param.Name, param.Value, param.Param2);
-            else if (stateCode == ((int)CStateType.CRITICALUP))
+            else if (stateCode == CStateType.CRITICALUP.VALUE)
             {
                 Console.WriteLine($"対応していないコードです：{CStateType.CRITICALUP}");
                 return new None(param.Name, param.Value, param.Param2);
             }
             //    return new CriticalUp(param.Name, param.Value, param.Param2);
-            else if (stateCode == ((int)CStateType.AUTOHEAL))
+            else if (stateCode == CStateType.AUTOHEAL.VALUE)
                 return new AutoHeal(param.Name, param.Value, param.Param2);
             else
                 throw new Exception("存在しない状態コードです。");
@@ -78,13 +77,13 @@ namespace KazApi.Domain._Factory
         {
             CodeDTO param = _codeEntities.Where(e => e.Value == stateCode).Single();
 
-            if (stateCode == ((int)CStateType.NONE))
+            if (stateCode == CStateType.NONE.VALUE)
                 return new None(dto);
-            else if (stateCode == ((int)CStateType.POISON))
+            else if (stateCode == CStateType.POISON.VALUE)
                 return new Poison(dto);
-            else if (stateCode == ((int)CStateType.SLEEP))
+            else if (stateCode == CStateType.SLEEP.VALUE)
                 return new Sleep(dto);
-            else if (stateCode == ((int)CStateType.CHARM))
+            else if (stateCode == CStateType.CHARM.VALUE)
                 return new Charm(dto);
             //else if (stateCode == ((int)CStateType.SLOW))
             //    return new Slow(param.Name, param.Value, param.Param2);
@@ -94,7 +93,7 @@ namespace KazApi.Domain._Factory
             //    return new DodgeUp(param.Name, param.Value, param.Param2);
             //else if (stateCode == ((int)CStateType.CRITICALUP))
             //    return new CriticalUp(param.Name, param.Value, param.Param2);
-            else if (stateCode == ((int)CStateType.AUTOHEAL))
+            else if (stateCode == CStateType.AUTOHEAL.VALUE)
                 return new AutoHeal(dto);
             else
                 throw new Exception("存在しない状態コードです。");

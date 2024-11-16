@@ -50,15 +50,15 @@ namespace KazApi.Domain._GameSystem
         /// </summary>
         public static int WeeknessDamage(IMonster enemy, ISkill skill, int damage)
         {
-            if (skill.ElementType == ((int)CElement.NONE)) return damage;
-            if (enemy.Week == ((int)CElement.NONE)) return damage;
+            if (skill.ElementType == CElement.NONE.VALUE) return damage;
+            if (enemy.Week == CElement.NONE.VALUE) return damage;
 
             int week = enemy.Week;
             bool isWeekness = week == skill.ElementType;
 
             if (isWeekness)
             {
-                damage = (int)(damage * CSysRate.WEEK_DAMAGE);
+                damage = (int)(damage * CSysRate.WEEK_DAMAGE.VALUE);
                 LOG.Logging(new BattleMetaData("弱点ダメージ！"));
             }
             return damage;
@@ -73,7 +73,7 @@ namespace KazApi.Domain._GameSystem
 
             if (isCritical)
             {
-                damage = (int)(damage * CSysRate.CRITICAL_DAMAGE);
+                damage = (int)(damage * CSysRate.CRITICAL_DAMAGE.VALUE);
                 LOG.Logging(new BattleMetaData("クリティカルヒット！"));
             }
             return damage;

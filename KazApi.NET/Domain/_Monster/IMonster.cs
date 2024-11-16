@@ -40,7 +40,7 @@ namespace KazApi.Domain._Monster
             Speed = dto.Speed;
             foreach (IState state in status) _status.Add(state);
             foreach (ISkill skill in skills) _skills.Add(skill);
-            Team = ((int)CTeam.UNKNOWN);
+            Team = CTeam.UNKNOWN.VALUE;
             Week = dto.Week;
         }
         /// <summary>

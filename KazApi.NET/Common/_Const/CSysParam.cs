@@ -1,53 +1,66 @@
 ﻿namespace KazApi.Common._Const
 {
-    public static class CEnvironment
+    /// <summary>
+    /// 環境独自の設定クラス
+    /// </summary>
+    public class CEnvironment : Enumeration<bool>
     {
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        private CEnvironment(bool value, string name) : base(value, name) { }
+
         /// <summary>
         /// 開発、ローカル環境
         /// </summary>
-        public static readonly bool DEVELOPMENT = false;
+        public static readonly CEnvironment DEVELOPMENT = new(false, "DEVELOPMENT");
         /// <summary>
         /// リモートサーバ、公開、本番
         /// </summary>
-        public static readonly bool PRODUCTION = true;
+        public static readonly CEnvironment PRODUCTION = new(true, "PRODUCTION");
         /// <summary>
         /// 現環境を決定 false: 開発, true: 本番
         /// </summary>
-        public static readonly bool THIS_ENVIRONMENT = PRODUCTION;
+        public static readonly CEnvironment THIS_ENVIRONMENT = DEVELOPMENT;
     }
 
     /// <summary>
     /// 補正率クラス
     /// </summary>
-    public static class CSysRate
+    public class CSysRate : Enumeration<double>
     {
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        private CSysRate(double value, string name) : base(value, name) { }
+
         /// <summary>
         /// クリティカル補正率
         /// </summary>
-        public static readonly double CRITICAL_DAMAGE = 1.6;
+        public static readonly CSysRate CRITICAL_DAMAGE = new(1.6, "CRITICAL_DAMAGE");
         /// <summary>
         /// 行動順補正率
         /// </summary>
-        public static readonly double MOVE_SPEED = 0.3;
+        public static readonly CSysRate MOVE_SPEED = new(0.3, "MOVE_SPEED");
         /// <summary>
         /// 弱点属性ダメージ
         /// </summary>
-        public static readonly double WEEK_DAMAGE = 1.8;
+        public static readonly CSysRate WEEK_DAMAGE = new(1.8, "WEEK_DAMAGE");
         /// <summary>
         /// 物理スキルダメージ補正率
         /// </summary>
-        public static readonly double PHYSICAL_SKILL_DAMAGE = 0.10;
+        public static readonly CSysRate PHYSICAL_SKILL_DAMAGE = new(0.10, "PHYSICAL_SKILL_DAMAGE");
         /// <summary>
         /// 魔法スキルダメージ補正率
         /// </summary>
-        public static readonly double MAGIC_SKILL_DAMAGE = 0.05;
+        public static readonly CSysRate MAGIC_SKILL_DAMAGE = new(0.05, "MAGIC_SKILL_DAMAGE");
         /// <summary>
         /// 全体攻撃調整・下限
         /// </summary>
-        public static readonly double ALL_ATTACK_ADJUST_MIN = 0.45;
+        public static readonly CSysRate ALL_ATTACK_ADJUST_MIN = new(0.45, "ALL_ATTACK_ADJUST_MIN");
         /// <summary>
         /// 全体攻撃調整・上限
         /// </summary>
-        public static readonly double ALL_ATTACK_ADJUST_MAX = 0.65;
+        public static readonly CSysRate ALL_ATTACK_ADJUST_MAX = new(0.65, "ALL_ATTACK_ADJUST_MAX");
     }
 }

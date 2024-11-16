@@ -21,7 +21,7 @@ namespace KazApi.Domain._Monster._State
         public Sleep(string name, int stateType, int maxDuration) 
               : base(name, stateType, maxDuration)
         {
-            base.StateType = ((int)CStateType.SLEEP);
+            base.StateType = CStateType.SLEEP.VALUE;
         }
 
         public override IState DeepCopy() 

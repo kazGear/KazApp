@@ -17,14 +17,14 @@ namespace KazApi.Repository
         /// </summary>
         public PostgreSQL(IConfiguration configuration)
         {
-            if (CEnvironment.THIS_ENVIRONMENT)
+            if (CEnvironment.THIS_ENVIRONMENT.VALUE)
                 Connection = new NpgsqlConnection(configuration["ConnectionStrings:Remote"]);
             else
                 Connection = new NpgsqlConnection(configuration["ConnectionStrings:Local"]);
         }
         public PostgreSQL()
         {
-            if (CEnvironment.THIS_ENVIRONMENT)
+            if (CEnvironment.THIS_ENVIRONMENT.VALUE)
                 Connection = new NpgsqlConnection(CONNECTION_STRING_REMOTE);
             else
                 Connection = new NpgsqlConnection(CONNECTION_STRING_LOCAL);

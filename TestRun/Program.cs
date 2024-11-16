@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore.Storage.Json;
 using System.Net;
 using System.Runtime.InteropServices;
 
+
 /*
  print util
  */
@@ -30,23 +31,34 @@ void PrintAll<T>(IEnumerable<T> os)
 
 bool doTest = true; // テスト稼働可否
 if (!doTest) return;
+
+// testtStart=======================
 Print(">>> test info.");
-
 UTimeMeasure.Start();
+// =================================
 
 
-Print(OSPlatform.Windows);
-Print(OSPlatform.OSX);
-Print(OSPlatform.Linux);
+Print(CCodeType.ELEMENT.VALUE);
+Print(CCodeType.ELEMENT.NAME);
+Print(CCodeType.STATE.VALUE);
+Print(CCodeType.STATE.NAME);
 
-Print(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "windows" : "?");
-Print(RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? "OSX" : "?");
-Print(RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? "Linux" : "?");
+var aa = Enumeration<CCodeType>.FieldNames();
+foreach (var a in aa) Console.WriteLine(a);
 
-Print(UEnvironment.IsRuntime());
+var bb = Enumeration<CCodeType>.FieldValues();
+foreach (var b in bb) Console.WriteLine(b);
 
-Print(UTimeMeasure.Stop());
+
+
+
+
+
+
+// ============================
+UTimeMeasure.Stop();
 Print(">>> test end...");
+// testEnd======================
 
 /************************************************************
  * **********************************************************
@@ -69,7 +81,7 @@ IEnumerable<MonsterSkillDTO> monsterSkillFromDB =
     posgre.Select<MonsterSkillDTO>(SQL.MonsterSkillSQL.SelectMonsterSkill());
 IEnumerable<CodeDTO> stateCodeFromDB =
     posgre.Select<CodeDTO>(SQL.CodeSQL.SelectCode())
-          .Where(e => e.Category == ((int)CCodeType.STATE));
+          .Where(e => e.Category == CCodeType.STATE.VALUE);
 
 Print(UTimeMeasure.Stop()); // SQL測定
 
@@ -89,20 +101,20 @@ IEnumerable<IMonster> battleMonsters =
 
 // テスト用モンスター用意
 IList<IMonster> testMonsters = new List<IMonster>();
-testMonsters.Add(monsterModels.Where(m => m.MonsterId == ((int)CMonster.マイコニド)).Single());
-testMonsters.Add(monsterModels.Where(m => m.MonsterId == ((int)CMonster.グリーンスライム)).Single());
-testMonsters.Add(monsterModels.Where(m => m.MonsterId == ((int)CMonster.プリースト)).Single());
-testMonsters.Add(monsterModels.Where(m => m.MonsterId == ((int)CMonster.デーモン)).Single());
+testMonsters.Add(monsterModels.Where(m => m.MonsterId == CMonster.マイコニド.VALUE).Single());
+testMonsters.Add(monsterModels.Where(m => m.MonsterId == CMonster.スライム.VALUE).Single());
+testMonsters.Add(monsterModels.Where(m => m.MonsterId == CMonster.プリースト.VALUE).Single());
+testMonsters.Add(monsterModels.Where(m => m.MonsterId == CMonster.デーモン.VALUE).Single());
 battleMonsters = testMonsters;
 //goblin.SetSkill(new List<ISkill>()
 //{
-//    skillModels.Where(s => s.Id == ((int)CSkill.打撃)).Single(),
-//    skillModels.Where(s => s.Id == ((int)CSkill.ポイズン)).Single()
+//    skillModels.Where(s => s.Id == CSkill.打撃.VALUE).Single(),
+//    skillModels.Where(s => s.Id == CSkill.ポイズン.VALUE).Single()
 //});
 
 
 // TODO 未実装 チーム決め
-((List<IMonster>)battleMonsters).ForEach(e => e.DefineTeam((int)CTeam.A));
+((List<IMonster>)battleMonsters).ForEach(e => e.DefineTeam(CTeam.A.VALUE));
 
 ILog<BattleMetaData> log = new BattleLogger();
 
@@ -113,7 +125,7 @@ string nextInfo = "\n▼ ▽ ▼ ▽ press enter ... ▼ ▽ ▼ ▽s";
 
 try
 {
-    if (battleMonsters.Where(e => e.Team == ((int)CTeam.UNKNOWN)).Count() > 0)
+    if (battleMonsters.Where(e => e.Team == CTeam.UNKNOWN.VALUE).Count() > 0)
     {
         throw new Exception("チーム決めが完了していません。");
     }

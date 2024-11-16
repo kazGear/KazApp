@@ -26,7 +26,7 @@ namespace KazApi.Domain._Monster._Skill
 
         public override void Use(IEnumerable<IMonster> monsters, IMonster me)
         {
-            bool isPositive = POSITIVE_SKILLS.Where(e => ((int)e) == _state.StateType)
+            bool isPositive = POSITIVE_SKILLS.Where(e => e.VALUE == _state.StateType)
                                              .Count() >= 1;
                         
             if (isPositive) // 有利スキル
@@ -52,7 +52,7 @@ namespace KazApi.Domain._Monster._Skill
         /// </summary>
         private void GiveNegativeState(IEnumerable<IMonster> monsters, IMonster me)
         {
-            if (base.TargetType == ((int)CTarget.ENEMY_RANDOM))
+            if (base.TargetType == CTarget.ENEMY_RANDOM.VALUE)
             {
                 // 単体付与
                 IMonster enemy = BattleSystem.SelectOneEnemy(monsters.ToList());

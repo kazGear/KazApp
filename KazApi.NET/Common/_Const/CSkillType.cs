@@ -3,44 +3,48 @@
     /// <summary>
     /// スキルタイプ定数
     /// </summary>
-    public enum CSkillType
+    public class CSkillType : Enumeration<int>
     {
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        private CSkillType(int id, string name) : base(id, name) { }
+
         /// <summary>
         /// 何も起こらない
         /// </summary>
-        NONE,
+        public static readonly CSkillType NONE = new(0, "NONE");
         /// <summary>
         /// 打撃攻撃
         /// </summary>
-        BLOW,
+        public static readonly CSkillType BLOW = new(1, "BLOW");
         /// <summary>
         /// 斬撃攻撃
         /// </summary>
-        SLASH,
+        public static readonly CSkillType SLASH = new(2, "SLASH");
         /// <summary>
         /// 魔法攻撃
         /// </summary>
-        ATTACK_MAGIC,
+        public static readonly CSkillType ATTACK_MAGIC = new(3, "ATTACK_MAGIC");
         /// <summary>
         /// 割合攻撃
         /// </summary>
-        ATTACK_RATE,
+        public static readonly CSkillType ATTACK_RATE = new(4, "ATTACK_RATE");
         /// <summary>
         /// 即死攻撃
         /// </summary>
-        DEAD,
+        public static readonly CSkillType DEAD = new(5, "DEAD");
         /// <summary>
         /// 回復スキル
         /// </summary>
-        HEAL,
+        public static readonly CSkillType HEAL = new(6, "HEAL");
         /// <summary>
         /// 状態系
         /// </summary>
-        STATE,
+        public static readonly CSkillType STATE = new(7, "STATE");
         /// <summary>
         /// 何もしない
         /// </summary>
-        NOT_MOVE
+        public static readonly CSkillType NOT_MOVE = new(8, "NOT_MOVE");
     }
-
 }

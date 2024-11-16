@@ -54,8 +54,8 @@ namespace KazApi.Domain._Monster._Skill
         public void PowerDown()
         {
             double allAttackDamage = Attack * URandom.RandomDouble(
-                CSysRate.ALL_ATTACK_ADJUST_MIN,
-                CSysRate.ALL_ATTACK_ADJUST_MAX
+                CSysRate.ALL_ATTACK_ADJUST_MIN.VALUE,
+                CSysRate.ALL_ATTACK_ADJUST_MAX.VALUE
                 );
             Attack = (int)allAttackDamage;
         }

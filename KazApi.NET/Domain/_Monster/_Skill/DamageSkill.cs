@@ -21,12 +21,12 @@ namespace KazApi.Domain._Monster._Skill
         {
             int target = OneOrAll();
 
-            if (target == ((int)CTarget.ENEMY_RANDOM)) // 単体攻撃
+            if (target == CTarget.ENEMY_RANDOM.VALUE) // 単体攻撃
             {
                 IMonster enemy = BattleSystem.SelectOneEnemy(monsters);
                 AttackEnemy(enemy, me);
             }
-            else if (target == ((int)CTarget.ENEMY_ALL)) // 全体攻撃
+            else if (target == CTarget.ENEMY_ALL.VALUE) // 全体攻撃
             {
                 // 全体攻撃は威力弱め
                 base.PowerDown();
@@ -45,7 +45,7 @@ namespace KazApi.Domain._Monster._Skill
         private void AttackEnemy(IMonster enemy, IMonster me)
         {
             // ダメージ量が多少揺れる
-            int damage = URandom.RandomChangeInt(base.Attack + me.Attack, CSysRate.PHYSICAL_SKILL_DAMAGE);
+            int damage = URandom.RandomChangeInt(base.Attack + me.Attack, CSysRate.PHYSICAL_SKILL_DAMAGE.VALUE);
             
             // 弱点等のダメージ欲正
             damage = BattleSystem.WeeknessDamage(enemy, this, damage);
@@ -66,10 +66,10 @@ namespace KazApi.Domain._Monster._Skill
         /// </summary>
         private int OneOrAll()
         {
-            if (base.TargetType == ((int)CTarget.ENEMY_RANDOM_OR_ALL))
+            if (base.TargetType == CTarget.ENEMY_RANDOM_OR_ALL.VALUE)
             {
-                return URandom.RandomBool() ? ((int)CTarget.ENEMY_RANDOM)
-                                            : ((int)CTarget.ENEMY_ALL);
+                return URandom.RandomBool() ? CTarget.ENEMY_RANDOM.VALUE
+                                            : CTarget.ENEMY_ALL.VALUE;
             }
             return base.TargetType;
 

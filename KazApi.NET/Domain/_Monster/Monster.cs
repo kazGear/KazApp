@@ -36,7 +36,7 @@ namespace KazApi.Domain._Monster
             string attackMessage = $"{base.MonsterName}は {skill.SkillName} を放った！";
 
             // 無害な攻撃のメッセージ
-            if (skill.SkillType == ((int)CSkillType.NOT_MOVE))
+            if (skill.SkillType == CSkillType.NOT_MOVE.VALUE)
                 attackMessage = $"{base.MonsterName}は {skill.SkillName} ...";
 
             base._Log.Logging(new BattleMetaData(TARGET_NONE, attackMessage + "\n"));

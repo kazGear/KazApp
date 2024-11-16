@@ -3,31 +3,36 @@
     /// <summary>
     /// コードタイプ定数
     /// </summary>
-    public enum CCodeType
-    {     
+    public class CCodeType : Enumeration<int>
+    {
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        private CCodeType(int id, string name) : base(id, name) { }
+
         /// <summary>
         /// 自然属性
         /// </summary>
-        ELEMENT = 1,
-        /// <summary>
-        /// 状態
-        /// </summary>
-        STATE = 2,
-        /// <summary>
-        /// 対象
-        /// </summary>
-        TARGET = 3,
-        /// <summary>
-        /// スキル
-        /// </summary>
-        SKILL = 4,
-        /// <summary>
-        /// システム補正率
-        /// </summary>
-        SYS_RATE = 5,
-        /// <summary>
-        /// モンスター
-        /// </summary>
-        MONSTER = 6
+        public static readonly CCodeType ELEMENT = new(1, "ELEMENT");
+        ///// <summary>
+        ///// 状態
+        ///// </summary>
+        public static readonly CCodeType STATE = new(2, "STATE");
+        ///// <summary>
+        ///// 対象
+        ///// </summary>
+        public static readonly CCodeType TARGET = new(3, "TARGET");
+        ///// <summary>
+        ///// スキル
+        ///// </summary>
+        public static readonly CCodeType SKILL = new(4, "SKILL");
+        ///// <summary>
+        ///// システム補正率
+        ///// </summary>
+        public static readonly CCodeType SYS_RATE = new(5, "SYS_RATE");
+        ///// <summary>
+        ///// モンスター
+        ///// </summary>
+        public static readonly CCodeType MONSTER = new(6, "MONSTER");
     }
 }

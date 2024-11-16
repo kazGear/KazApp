@@ -41,9 +41,9 @@ for (int i = 0; i < battleTimes; i++)
         IEnumerable<IMonster> battleMonsters = _service.CreateBattleMonsters(battleMonstersDTO);
 
         // TODO 未実装 チーム決め
-        ((List<IMonster>)battleMonsters).ForEach(e => e.DefineTeam((int)CTeam.A));
+        ((List<IMonster>)battleMonsters).ForEach(e => e.DefineTeam(CTeam.A.VALUE));
 
-        if (battleMonsters.Where(e => e.Team == ((int)CTeam.UNKNOWN)).Count() > 0)
+        if (battleMonsters.Where(e => e.Team == (CTeam.UNKNOWN.VALUE)).Count() > 0)
         {
             throw new Exception("チーム決めが完了していません。");
         }

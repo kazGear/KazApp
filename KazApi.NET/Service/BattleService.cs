@@ -121,7 +121,7 @@ namespace KazApi.Service
         {
             IEnumerable<CodeDTO> stateCodeFromDB =
                 _posgre.Select<CodeDTO>(SQL.CodeSQL.SelectCode())
-                       .Where(e => e.Category == (int)CCodeType.STATE);
+                       .Where(e => e.Category == CCodeType.STATE.VALUE);
 
             SkillFactory skillFactory = new SkillFactory(stateCodeFromDB);
             StateFactory stateFactory = new StateFactory(stateCodeFromDB);

@@ -48,7 +48,7 @@ namespace KazApi.Domain._Monster._State
 
             // 睡眠時は発動しない
             int sleepCnt = me.CurrentStatus()
-                             .Where(e => e.StateType == ((int)CStateType.SLEEP))
+                             .Where(e => e.StateType == CStateType.SLEEP.VALUE)
                              .Count();
             if (sleepCnt >= 1)
             {

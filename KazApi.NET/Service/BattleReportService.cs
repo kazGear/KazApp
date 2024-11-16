@@ -7,7 +7,6 @@ namespace KazApi.Service
     public class BattleReportService
     {
         private readonly IDatabase _posgre;
-
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -25,8 +24,8 @@ namespace KazApi.Service
             try
             {
                 object parameter = new
-                {
-                    category = CCodeType.MONSTER
+                { 
+                    category = CCodeType.MONSTER.VALUE
                 };
                 string sql = SQL.ReportSQL.SelectMonsterTypes();
 
