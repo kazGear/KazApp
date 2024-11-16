@@ -27,14 +27,14 @@ namespace KazApi.Controller
         /// CORS対策
         /// </summary>
 
-        [HttpOptions("api/*")]
-        public IActionResult Preflight()
-        {
-            Response.Headers.Add("Access-Control-Allow-Origin", "*");
-            Response.Headers.Add("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
-            Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Authorization");
-            return NoContent();
-        }
+        //[HttpOptions("api/*")]
+        //public IActionResult Preflight()
+        //{
+        //    Response.Headers.Add("Access-Control-Allow-Origin", "*");
+        //    Response.Headers.Add("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+        //    Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        //    return NoContent();
+        //}
 
         /// <summary>
         /// 初期処理

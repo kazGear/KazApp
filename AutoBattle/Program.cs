@@ -117,6 +117,7 @@ for (int i = 0; i < battleTimes; i++)
 
         _service.InsertBattleResult(records, endDate, endTime);
 
+        Console.WriteLine($"{i + 1}戦目 終了.");
 
         // 間隔を空け再選（2分ごと、最終回は待たない）
         if (i < 2)

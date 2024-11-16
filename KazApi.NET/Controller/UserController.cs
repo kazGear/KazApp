@@ -6,11 +6,11 @@ using KazApi.DTO;
 namespace KazApi.Controller
 {
     [ApiController]
-    public class BattleReportController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly BattleReportService _service;
 
-        public BattleReportController(IConfiguration configuration)
+        public UserController(IConfiguration configuration)
         {
             _service = new BattleReportService(configuration);
         }

@@ -35,15 +35,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\_Login\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="Properties\launchSettings.Production.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Domain\_Login\" />
   </ItemGroup>
 
 </Project>
