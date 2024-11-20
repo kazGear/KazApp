@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using KazApi.Service;
 using KazApi.DTO;
+using KazApi.Controller.Service;
 
 namespace KazApi.Controller
 {

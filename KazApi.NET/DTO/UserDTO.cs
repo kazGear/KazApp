@@ -7,7 +7,9 @@ namespace KazApi.DTO
         public string LoginPass { get; set; }
         public int FailedLoginCnt { get; set; }
         public bool IsLoginDisabled { get; set; }
-        public string UserName { get; set; }
+        public string DispName { get; set; }
+        public string DispShortName { get; set; }
+        public int Role { get; set; }
         public int Cash { get; set; }
         public int Wins { get; set; }
         public int WinsGetCash { get; set; }
@@ -16,3 +18,4 @@ namespace KazApi.DTO
         public int LossesLostCash { get; set; }
     }
 }
+ 

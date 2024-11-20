@@ -1,11 +1,11 @@
 ﻿using KazApi.Common._Const;
 using KazApi.Domain._Monster;
 using KazApi.Repository;
-using KazApi.Service;
 using KazApi.Domain._Monster._State;
-using KazApi.Lib;
 using KazApi.DTO;
 using System.Text;
+using KazApi.Controller.Service;
+using CSLib.Lib;
 
 Console.WriteLine("Auto battle start...");
 
@@ -122,8 +122,8 @@ for (int i = 0; i < battleTimes; i++)
         // 間隔を空け再選（2分ごと、最終回は待たない）
         if (i < 2)
         {
-            await Task.Delay(120000);
             // Console.Writeline("再選待ち...(2分)");
+            await Task.Delay(120000);
         }
     }
     catch (Exception e)

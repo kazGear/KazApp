@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace KazApi.Lib
+namespace CSLib.Lib
 {
     /// <summary>
     /// 暗号ユーティリティ

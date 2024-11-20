@@ -2,7 +2,7 @@
 using KazApi.DTO;
 using KazApi.Repository;
 
-namespace KazApi.Service
+namespace KazApi.Controller.Service
 {
     public class BattleReportService
     {
@@ -24,7 +24,7 @@ namespace KazApi.Service
             try
             {
                 object parameter = new
-                { 
+                {
                     category = CCodeType.MONSTER.VALUE
                 };
                 string sql = SQL.ReportSQL.SelectMonsterTypes();
@@ -45,7 +45,8 @@ namespace KazApi.Service
         {
             try
             {
-                var param = new {
+                var param = new
+                {
                     monster_type = int.Parse(monsterTypeId)
                 };
 
@@ -61,7 +62,7 @@ namespace KazApi.Service
                         MonsterName = e.MonsterName,
                         BattleCount = e.BattleCount,
                         Wins = e.Wins,
-                        WinRate = ((double)e.Wins / (double)e.BattleCount * 100).ToString("N2") + "%"
+                        WinRate = (e.Wins / (double)e.BattleCount * 100).ToString("N2") + "%"
                     });
 
                 return editedReport;
@@ -74,7 +75,8 @@ namespace KazApi.Service
 
         public IEnumerable<BattleReportDTO> SelectBattleReport(
             string battleScale, DateTime? dateFrom, DateTime? dateTo
-        ) {
+        )
+        {
             try
             {
                 var param = new

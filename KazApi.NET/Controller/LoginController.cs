@@ -1,5 +1,5 @@
-﻿using KazApi.Lib;
-using KazApi.Service;
+﻿using CSLib.Lib;
+using KazApi.Controller.Service;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text.Json.Serialization;

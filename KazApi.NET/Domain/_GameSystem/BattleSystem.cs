@@ -1,8 +1,8 @@
-﻿using KazApi.Common._Const;
+﻿using CSLib.Lib;
+using KazApi.Common._Const;
 using KazApi.Common._Log;
 using KazApi.Domain._Monster;
 using KazApi.Domain._Monster._Skill;
-using KazApi.Lib;
 
 namespace KazApi.Domain._GameSystem
 {

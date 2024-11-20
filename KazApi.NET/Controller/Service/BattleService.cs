@@ -1,16 +1,16 @@
-﻿using KazApi.Common._Const;
+﻿using CSLib.Lib;
+using KazApi.Common._Const;
 using KazApi.Common._Log;
 using KazApi.Domain._Factory;
 using KazApi.Domain._Monster;
 using KazApi.Domain._Monster._Skill;
 using KazApi.Domain._Monster._State;
 using KazApi.DTO;
-using KazApi.Lib;
 using KazApi.Repository;
 using System.Transactions;
 
 
-namespace KazApi.Service
+namespace KazApi.Controller.Service
 {
     public class BattleService
     {
@@ -20,7 +20,7 @@ namespace KazApi.Service
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public BattleService() 
+        public BattleService()
         {
             _posgre = new PostgreSQL();
         }
@@ -30,8 +30,8 @@ namespace KazApi.Service
         /// </summary>
         /// <param name="configuration"></param>
         public BattleService(IConfiguration configuration)
-        {   
-            _log = new BattleLogger();                 
+        {
+            _log = new BattleLogger();
             _posgre = new PostgreSQL(configuration!);
         }
 
@@ -248,7 +248,8 @@ namespace KazApi.Service
             IEnumerable<MonsterDTO> monsters,
             DateTime endDate,
             TimeSpan endTime
-        ) {
+        )
+        {
             try
             {
                 using (var transaciton = new TransactionScope())

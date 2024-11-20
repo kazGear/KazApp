@@ -4,8 +4,8 @@ using Newtonsoft.Json;
 using KazApi.Common._Log;
 using KazApi.Common._Const;
 using KazApi.Domain._ViewModel;
-using KazApi.Service;
 using KazApi.DTO;
+using KazApi.Controller.Service;
 
 
 

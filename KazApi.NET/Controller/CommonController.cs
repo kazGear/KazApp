@@ -1,5 +1,5 @@
 ﻿using CSLib.Lib;
-using KazApi.Service;
+using KazApi.Controller.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KazApi.Controller

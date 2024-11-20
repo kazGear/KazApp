@@ -1,4 +1,4 @@
-﻿namespace KazApi.Lib
+﻿namespace CSLib.Lib
 {
     /// <summary>
     /// 乱数ユーティリティ
@@ -32,7 +32,7 @@
         public static double RandomDouble(double minValue, double maxValue)
         {
             Random r = new Random();
-            return r.NextDouble() * ( maxValue - minValue) + minValue;
+            return r.NextDouble() * (maxValue - minValue) + minValue;
         }
 
         /// <summary>
@@ -66,7 +66,7 @@
         /// <returns></returns>
         public static int durationCountUp()
         {
-            bool doubleCount = URandom.RandomBool();
+            bool doubleCount = RandomBool();
 
             // 早く目覚めることがある
             if (doubleCount)
