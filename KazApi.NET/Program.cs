@@ -1,4 +1,8 @@
+using KazApi.Common._Filter;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using System.Net;
+using System.Text;
 
 public class Program
 {
@@ -39,6 +43,39 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
+        // 例外フィルター
+        services.AddControllers(options =>
+        {
+            options.Filters.Add<ExceptionFilter>();
+        });
+
+        // フィルター、インターセクション
+        services.AddControllersWithViews(options =>
+        {
+            options.Filters.Add(typeof(AuthActionFilter));
+        });
+
+        // JWT設定
+        services.AddAuthentication(options => 
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme; 
+        }).AddJwtBearer(options => 
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
+            { 
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = Configuration["Jwt:Issuer"],
+                ValidAudience = Configuration["Jwt:Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes(Configuration["Jwt:Key"])) 
+            }; 
+        });
+
+        // JS: cors設定
         services.AddCors(options =>
         {
             options.AddPolicy("AllowAll",

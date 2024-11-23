@@ -24,19 +24,6 @@ namespace KazApi.Controller
         }
 
         /// <summary>
-        /// CORS対策
-        /// </summary>
-
-        //[HttpOptions("api/*")]
-        //public IActionResult Preflight()
-        //{
-        //    Response.Headers.Add("Access-Control-Allow-Origin", "*");
-        //    Response.Headers.Add("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
-        //    Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Authorization");
-        //    return NoContent();
-        //}
-
-        /// <summary>
         /// 初期処理
         /// </summary>
         [HttpPost("api/battle/init")]
@@ -100,10 +87,7 @@ namespace KazApi.Controller
             // モンスターの行動
             foreach (IMonster me in orderedMonsters)
             {
-                if (me.Hp <= 0)
-                {
-                    continue;
-                }
+                if (me.Hp <= 0) continue;
 
                 // 誰のターンか
                 _service.WhoseTurn(me);
@@ -128,12 +112,8 @@ namespace KazApi.Controller
 
             BattleViewModel model = new BattleViewModel();
             model.Monsters = monstersDTO;
-            model.BattleLog = _logger.DumpMemory(); Console.WriteLine();
-
-            Console.WriteLine($"ログ数：{model.BattleLog.Count()}");
-            foreach (var e in model.BattleLog) Console.WriteLine(e); // tmp
-
-
+            model.BattleLog = _logger.DumpMemory();
+            
             return JsonConvert.SerializeObject(model);
         }
 

@@ -1,8 +1,6 @@
 ﻿using CSLib.Lib;
-using KazApi.Common._Const;
 using KazApi.DTO;
 using KazApi.Repository;
-using Microsoft.AspNetCore.Mvc;
 
 namespace KazApi.Controller.Service
 {
@@ -21,8 +19,8 @@ namespace KazApi.Controller.Service
         /// 登録済ユーザーを取得
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<UserDTO> RegistedSelectUsers()
-            => _posgre.Select<UserDTO>(SQL.UserSQL.SelecUsers());
+        public IEnumerable<DTO.UserDTO> RegistedSelectUsers()
+            => _posgre.Select<DTO.UserDTO>(SQL.UserSQL.SelecUsers());
 
         // ユーザー登録
         public bool UserRegist(
