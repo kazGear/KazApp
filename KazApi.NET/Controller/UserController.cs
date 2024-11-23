@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using KazApi.Controller.Service;
 using KazApi.DTO;
+using KazApi.Repository;
 
 namespace KazApi.Controller
 {
@@ -9,10 +10,12 @@ namespace KazApi.Controller
     public class UserController : ControllerBase
     {
         private readonly UserService _service;
+        private readonly IDatabase _posgre;
 
         public UserController(IConfiguration configuration)
         {
             _service = new UserService(configuration);
+            _posgre = new PostgreSQL(configuration);
         }
 
         /// <summary>
@@ -58,5 +61,14 @@ namespace KazApi.Controller
             }
         }
 
+        [HttpPost("api/user/loginUser")]
+        public UserDTO? SelectUser([FromQuery] string? userName)
+        {
+            if (userName == null) return null;
+
+            var param = new { disp_name = userName };
+            return _posgre.Select<UserDTO>(SQL.UserSQL.SelectLoginUser(), param)
+                          .SingleOrDefault();
+        }
     }
 }

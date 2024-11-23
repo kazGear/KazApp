@@ -25,8 +25,10 @@ namespace KazApi.Controller
         /// ログイン実行
         /// </summary>
         [HttpPost("api/login")]
-        public IActionResult Login([FromQuery] string loginId, [FromQuery] string password)
+        public IActionResult Login([FromQuery] string? loginId, [FromQuery] string? password)
         {
+            if (loginId == null || password == null) return Unauthorized();
+
             // ユーザの認証
             Auth auth = new Auth(_posgre);
             UserDTO? user = auth.AuthenticateUser(loginId, password);

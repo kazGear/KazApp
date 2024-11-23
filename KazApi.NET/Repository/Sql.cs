@@ -33,6 +33,16 @@ namespace KazApi.Repository
                 ";
                 return SQL;
             }
+
+            public static string SelectLoginUser()
+            {
+                string SQL = @"
+                    SELECT disp_name
+                      FROM m_user
+                     WHERE disp_name = @disp_name ;
+                ";
+                return SQL;
+            }
             public static string InsertUser()
             {
                 string SQL = @"

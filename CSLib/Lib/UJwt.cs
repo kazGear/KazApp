@@ -48,11 +48,19 @@ namespace CSLib.Lib
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
 
             // トークンデコード
-            JwtSecurityToken? jwtToken = handler.ReadToken(token) as JwtSecurityToken;
-            if (jwtToken == null) throw new ArgumentException("無効なトークンです。");
+            JwtSecurityToken? jwtToken = null;
+            try
+            {
+                jwtToken = handler.ReadToken(token) as JwtSecurityToken;
+                if (jwtToken == null) throw new ArgumentException("無効なトークンです。");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
             // 有効期限
-            DateTime limit = jwtToken.ValidTo;
+            DateTime limit = jwtToken!.ValidTo;
             DateTime now = DateTime.UtcNow;
 
             // 期限比較

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.IdentityModel.Tokens;
 using System.Net;
 
 namespace KazApi.Common._Filter
@@ -16,6 +17,7 @@ namespace KazApi.Common._Filter
             response.ContentType = "application/json";
             response.StatusCode = context.Exception switch
             {
+                SecurityTokenMalformedException => (int)HttpStatusCode.BadRequest,
                 ArgumentException => (int)HttpStatusCode.BadRequest,
                 KeyNotFoundException => (int)HttpStatusCode.NotFound,
                 _ => (int)HttpStatusCode.InternalServerError
