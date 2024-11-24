@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System.Diagnostics.CodeAnalysis;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -18,7 +17,7 @@ namespace CSLib.Lib
         /// </summary>
         public static string GenerateJwtToken(string userName, IConfiguration _configuration)
         {
-            SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
             SigningCredentials credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             DateTime now = DateTime.UtcNow; // 基準時刻
@@ -52,11 +51,11 @@ namespace CSLib.Lib
             try
             {
                 jwtToken = handler.ReadToken(token) as JwtSecurityToken;
-                if (jwtToken == null) throw new ArgumentException("無効なトークンです。");
+                if (jwtToken == null) return false;
             }
             catch (Exception)
             {
-                throw;
+                return false;
             }
 
             // 有効期限

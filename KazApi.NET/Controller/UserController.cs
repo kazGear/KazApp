@@ -55,7 +55,7 @@ namespace KazApi.Controller
                 bool result = _service.UserRegist(LoginId, Password, DispName, DispShortName);
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new Exception(/* TODO */"エラー画面に伝搬したい");
             }
