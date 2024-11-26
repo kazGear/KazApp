@@ -1,6 +1,7 @@
 ﻿using KazApi.Common._Const;
 using KazApi.DTO;
 using KazApi.Repository;
+using KazApi.Repository.sql;
 
 namespace KazApi.Controller.Service
 {
@@ -27,7 +28,7 @@ namespace KazApi.Controller.Service
                 {
                     category = CCodeType.MONSTER.VALUE
                 };
-                string sql = SQL.ReportSQL.SelectMonsterTypes();
+                string sql = ReportSQL.SelectMonsterTypes();
 
                 return _posgre.Select<MonsterTypeDTO>(sql, parameter); ;
             }
@@ -52,7 +53,7 @@ namespace KazApi.Controller.Service
 
                 IEnumerable<MonsterRepostDTO> report
                     = _posgre.Select<MonsterRepostDTO>(
-                        SQL.ReportSQL.SelectMonsterReport(param.monster_type), param);
+                        ReportSQL.SelectMonsterReport(param.monster_type), param);
 
                 // 勝率を算出
                 IEnumerable<MonsterRepostDTO> editedReport
@@ -88,7 +89,7 @@ namespace KazApi.Controller.Service
 
                 IEnumerable<BattleReportDTO> report
                     = _posgre.Select<BattleReportDTO>(
-                        SQL.ReportSQL.SelectBattleReport(param.battle_scale,
+                        ReportSQL.SelectBattleReport(param.battle_scale,
                                                          param.from,
                                                          param.to
                                                          ), param);

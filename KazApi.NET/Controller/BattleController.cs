@@ -1,11 +1,14 @@
-﻿using KazApi.Domain._Monster;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using KazApi.Common._Log;
 using KazApi.Common._Const;
 using KazApi.Domain._ViewModel;
 using KazApi.DTO;
 using KazApi.Controller.Service;
+using KazApi.Domain.monster;
+using KazApi.Domain._Factory;
+using KazApi.Domain._GameSystem;
+
 
 
 
@@ -16,11 +19,13 @@ namespace KazApi.Controller
     {
         private readonly ILog<BattleMetaData> _logger;
         private readonly BattleService _service;
+        private readonly MonsterFactory _monsterFactory;
 
         public BattleController(IConfiguration configuration)
         {
             _logger = new BattleLogger();
             _service = new BattleService(configuration);
+            _monsterFactory = new MonsterFactory();
         }
 
         /// <summary>
@@ -38,14 +43,14 @@ namespace KazApi.Controller
 
                 // モンスターDTO構築
                 IEnumerable<MonsterDTO> monstersDTO =
-                    _service.MappingToMonsterDTO(monstersFromDB, skillsFromDB, monsterSkillFromDB);
+                    _monsterFactory.MappingToMonsterDTO(monstersFromDB, skillsFromDB, monsterSkillFromDB);
 
                 // 参加モンスター（ランダム）
                 IEnumerable<MonsterDTO> battleMonsters
-                    = _service.MonsterSelector(monstersDTO, selectMonstersCount);
+                    = BattleSystem.MonsterSelector(monstersDTO, selectMonstersCount);
 
                 // 賭けレート算出
-                _service.CalcBetRate(battleMonsters);
+                BattleSystem.CalcBetRate(battleMonsters);
 
                 // テスト用モンスターで対戦
                 //IEnumerable<MonsterDTO> testMonsters = new List<MonsterDTO>()
@@ -73,7 +78,8 @@ namespace KazApi.Controller
         public ActionResult<string> NextTurn([FromBody] IEnumerable<MonsterDTO> monsters)
         {
             // 戦闘用モンスターを構築
-            IEnumerable<IMonster> battleMonsters = _service.CreateBattleMonsters(monsters);
+            IEnumerable<CodeDTO> codes = _service.SelectStateCode();
+            IEnumerable<IMonster> battleMonsters = _monsterFactory.CreateBattleMonsters(monsters, codes);
 
             // TODO 未実装 チーム決め
             ((List<IMonster>)battleMonsters).ForEach(e => e.DefineTeam(CTeam.A.VALUE));
@@ -82,7 +88,7 @@ namespace KazApi.Controller
                 throw new Exception("チーム決めが完了していません。");
             }
             // 行動順決め
-            IEnumerable<IMonster> orderedMonsters = _service.ActionOrder(battleMonsters);
+            IEnumerable<IMonster> orderedMonsters = BattleSystem.ActionOrder(battleMonsters);
 
             // モンスターの行動
             foreach (IMonster me in orderedMonsters)
@@ -90,7 +96,7 @@ namespace KazApi.Controller
                 if (me.Hp <= 0) continue;
 
                 // 誰のターンか
-                _service.WhoseTurn(me);
+                MessageInfo.WhoseTurn(me);
                
                 // 状態異常の影響
                 me.StateImpact();
@@ -101,14 +107,14 @@ namespace KazApi.Controller
                     me.Move(otherMonsters);
 
                 // 状態異常解除
-                _service.DisabledStatus(me);
+                BattleSystem.DisabledStatus(me);
             }
 
             // 勝敗判定
-            _service.BattleResult(battleMonsters);
+            MessageInfo.BattleResult(battleMonsters);
 
             // DTOへ変換
-            IEnumerable<MonsterDTO> monstersDTO = _service.ConvertToDTO(battleMonsters);
+            IEnumerable<MonsterDTO> monstersDTO = _monsterFactory.ConvertToDTO(battleMonsters);
 
             BattleViewModel model = new BattleViewModel();
             model.Monsters = monstersDTO;

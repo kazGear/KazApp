@@ -1,10 +1,10 @@
 ﻿using CSLib.Lib;
 using KazApi.Common._Const;
 using KazApi.Common._Log;
-using KazApi.Domain._Monster._Skill;
+using KazApi.Domain.monster._Skill;
 using KazApi.DTO;
 
-namespace KazApi.Domain._Monster._State
+namespace KazApi.Domain.monster._State
 {
     /// <summary>
     /// 魅了状態クラス
@@ -23,16 +23,16 @@ namespace KazApi.Domain._Monster._State
               : base(name, stateType, maxDuration) { }
 
         public override IState DeepCopy()
-            => new Charm(base.Name, base.StateType, base.MaxDuration);
+            => new Charm(Name, StateType, MaxDuration);
 
         public override void DisabledLogging(IMonster monster)
         {
             bool disableState = true;
 
-            base._Log.Logging(new BattleMetaData(
+            _Log.Logging(new BattleMetaData(
                 monster.MonsterId,
                 disableState,
-                base.Name,
+                Name,
                 $"{monster.MonsterName}は我に返った！")
                 );
 
@@ -52,21 +52,21 @@ namespace KazApi.Domain._Monster._State
                              .Count();
             if (sleepCnt >= 1)
             {
-                base.DurationCount++;
+                DurationCount++;
                 return;
             }
-            
+
             ISkill skill = me.SelectSkill();
             while (skill is HealSkill || skill is NoMoveSkill) // 選び直し
                 skill = me.SelectSkill();
 
             // 自傷
-            base._Log.Logging(new BattleMetaData(me.MonsterId, $"{me.MonsterName}は自分に攻撃！"));
-            base._Log.Logging(new BattleMetaData(me.MonsterId, $"{me.MonsterName}は {skill.SkillName} を放った！"));
+            _Log.Logging(new BattleMetaData(me.MonsterId, $"{me.MonsterName}は自分に攻撃！"));
+            _Log.Logging(new BattleMetaData(me.MonsterId, $"{me.MonsterName}は {skill.SkillName} を放った！"));
             skill.Use([me], me);
 
             // 魅了回数減少
-            base.DurationCount += URandom.durationCountUp();
+            DurationCount += URandom.durationCountUp();
         }
     }
 }

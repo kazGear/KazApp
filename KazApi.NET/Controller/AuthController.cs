@@ -1,5 +1,5 @@
 ﻿using CSLib.Lib;
-using KazApi.Domain._Login;
+using KazApi.Domain._User;
 using KazApi.DTO;
 using KazApi.Repository;
 using Microsoft.AspNetCore.Mvc;

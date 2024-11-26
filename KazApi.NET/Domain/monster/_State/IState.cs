@@ -1,7 +1,7 @@
 ﻿using KazApi.Common._Log;
 using KazApi.DTO;
 
-namespace KazApi.Domain._Monster._State
+namespace KazApi.Domain.monster._State
 {
     /// <summary>
     /// 状態異常インターフェイス
@@ -9,7 +9,7 @@ namespace KazApi.Domain._Monster._State
     public abstract class IState
     {
         protected readonly ILog<BattleMetaData> _Log = new BattleLogger();
-        
+
         public string Name { get; protected set; }
         public int StateType { get; protected set; }
         public int MaxDuration { get; protected set; }

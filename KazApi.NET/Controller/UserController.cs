@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using KazApi.Controller.Service;
 using KazApi.DTO;
 using KazApi.Repository;
+using KazApi.Repository.sql;
 
 namespace KazApi.Controller
 {
@@ -67,7 +68,7 @@ namespace KazApi.Controller
             if (userName == null) return null;
 
             var param = new { disp_name = userName };
-            return _posgre.Select<UserDTO>(SQL.UserSQL.SelectLoginUser(), param)
+            return _posgre.Select<UserDTO>(UserSQL.SelectLoginUser(), param)
                           .SingleOrDefault();
         }
     }

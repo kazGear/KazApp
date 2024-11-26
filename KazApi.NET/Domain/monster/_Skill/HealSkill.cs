@@ -3,7 +3,7 @@ using KazApi.Common._Const;
 using KazApi.Common._Log;
 using KazApi.DTO;
 
-namespace KazApi.Domain._Monster._Skill
+namespace KazApi.Domain.monster._Skill
 {
     /// <summary>
     /// 回復スキルクラス
@@ -18,7 +18,7 @@ namespace KazApi.Domain._Monster._Skill
 
         public override void Use(IEnumerable<IMonster> monsters, IMonster me)
         {
-            int healPoint = URandom.RandomChangeInt(base.Attack, CSysRate.MAGIC_SKILL_DAMAGE.VALUE);
+            int healPoint = URandom.RandomChangeInt(Attack, CSysRate.MAGIC_SKILL_DAMAGE.VALUE);
 
             // MaxHp以上に回復はできない
             int healAble = me.MaxHp - me.Hp;
@@ -28,7 +28,7 @@ namespace KazApi.Domain._Monster._Skill
                 me.MonsterId,
                 me.Hp,
                 healPoint * -1,
-                base.SkillId,
+                SkillId,
                   $"{me.MonsterName}は{healPoint}ポイント回復した！"
                 ));
 

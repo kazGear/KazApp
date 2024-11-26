@@ -2,7 +2,7 @@
 using KazApi.Common._Log;
 using KazApi.DTO;
 
-namespace KazApi.Domain._Monster._State
+namespace KazApi.Domain.monster._State
 {
     /// <summary>
     /// 自動回復状態クラス
@@ -21,19 +21,19 @@ namespace KazApi.Domain._Monster._State
         /// コンストラクタ
         /// </summary>
         public AutoHeal(string name, int stateType, int maxDuration)
-                 : base(name, stateType, maxDuration) {  }
-       
+                 : base(name, stateType, maxDuration) { }
+
         public override IState DeepCopy()
-            => new AutoHeal(base.Name, base.StateType, base.MaxDuration);
+            => new AutoHeal(Name, StateType, MaxDuration);
 
         public override void DisabledLogging(IMonster monster)
         {
             bool disableState = true;
 
-            base._Log.Logging(new BattleMetaData(
+            _Log.Logging(new BattleMetaData(
                 monster.MonsterId,
                 disableState,
-                base.Name,
+                Name,
                 $"{monster.MonsterName}の自然治癒力がなくなった。")
                 );
 
@@ -51,8 +51,8 @@ namespace KazApi.Domain._Monster._State
             int healLimit = me.MaxHp - me.Hp;
             int healPointFix = healPoint2 >= healLimit ? healLimit : healPoint2;
 
-            base._Log.Logging(new BattleMetaData(me.MonsterId, $"{me.MonsterName}の自然治癒！"));
-            base._Log.Logging(new BattleMetaData(
+            _Log.Logging(new BattleMetaData(me.MonsterId, $"{me.MonsterName}の自然治癒！"));
+            _Log.Logging(new BattleMetaData(
                 me.MonsterId,
                 me.Hp,
                 healPointFix * -1,
@@ -61,7 +61,7 @@ namespace KazApi.Domain._Monster._State
 
             me.AcceptDamage(healPointFix * -1); // マイナスダメージを加えてHP増加
 
-            base.DurationCount++;
+            DurationCount++;
         }
 
     }

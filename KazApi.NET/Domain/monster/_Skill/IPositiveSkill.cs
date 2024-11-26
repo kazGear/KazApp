@@ -1,4 +1,4 @@
-﻿namespace KazApi.Domain._Monster._Skill
+﻿namespace KazApi.Domain.monster._Skill
 {
     /// <summary>
     /// マーカーインターフェイス
@@ -6,6 +6,6 @@
     /// </summary>
     public interface IPositiveSkill
     {
-    
+
     }
 }

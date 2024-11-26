@@ -1,4 +1,4 @@
-﻿using KazApi.Domain._Monster;
+﻿using KazApi.Domain.monster;
 using System.Text.Json.Serialization;
 
 namespace KazApi.DTO

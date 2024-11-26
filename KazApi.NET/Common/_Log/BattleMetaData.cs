@@ -1,4 +1,4 @@
-﻿using KazApi.Domain._Monster;
+﻿using KazApi.Domain.monster;
 
 namespace KazApi.Common._Log
 {

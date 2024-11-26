@@ -1,7 +1,7 @@
 ﻿using KazApi.Common._Const;
 using KazApi.DTO;
 
-namespace KazApi.Domain._Monster._State
+namespace KazApi.Domain.monster._State
 {
     /// <summary>
     /// 状態異常なしクラス
@@ -12,19 +12,19 @@ namespace KazApi.Domain._Monster._State
         /// コンストラクタ
         /// </summary>
         public None(StateDTO dto) : base(dto) { }
-        
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public None(string name, int stateType, int maxDuration) 
+        public None(string name, int stateType, int maxDuration)
              : base(name, stateType, maxDuration)
         {
-            base.StateType = CStateType.NONE.VALUE;
+            StateType = CStateType.NONE.VALUE;
         }
 
 
         public override IState DeepCopy()
-            => new None(base.Name, base.StateType, base.MaxDuration);
+            => new None(Name, StateType, MaxDuration);
 
         public override void DisabledLogging(IMonster monster)
             => throw new NotImplementedException();

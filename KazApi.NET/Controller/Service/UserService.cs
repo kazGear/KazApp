@@ -1,6 +1,6 @@
 ﻿using CSLib.Lib;
-using KazApi.DTO;
 using KazApi.Repository;
+using KazApi.Repository.sql;
 
 namespace KazApi.Controller.Service
 {
@@ -20,7 +20,7 @@ namespace KazApi.Controller.Service
         /// </summary>
         /// <returns></returns>
         public IEnumerable<DTO.UserDTO> RegistedSelectUsers()
-            => _posgre.Select<DTO.UserDTO>(SQL.UserSQL.SelecUsers());
+            => _posgre.Select<DTO.UserDTO>(UserSQL.SelecUsers());
 
         // ユーザー登録
         public bool UserRegist(
@@ -42,7 +42,7 @@ namespace KazApi.Controller.Service
                     disp_short_name = DispShortName
                 };
 
-                _posgre.Execute(SQL.UserSQL.InsertUser(), param);
+                _posgre.Execute(UserSQL.InsertUser(), param);
             }
             catch (Exception)
             {

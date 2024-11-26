@@ -4,7 +4,7 @@ using KazApi.Common._Log;
 using KazApi.Domain._GameSystem;
 using KazApi.DTO;
 
-namespace KazApi.Domain._Monster._Skill
+namespace KazApi.Domain.monster._Skill
 {
     /// <summary>
     /// ダメージ付与クラス
@@ -29,10 +29,10 @@ namespace KazApi.Domain._Monster._Skill
             else if (target == CTarget.ENEMY_ALL.VALUE) // 全体攻撃
             {
                 // 全体攻撃は威力弱め
-                base.PowerDown();
+                PowerDown();
                 monsters = monsters.Where(e => e.Hp > 0);
                 foreach (IMonster enemy in monsters) AttackEnemy(enemy, me);
-                base.InitPower();
+                InitPower();
             }
             else
             {
@@ -45,8 +45,8 @@ namespace KazApi.Domain._Monster._Skill
         private void AttackEnemy(IMonster enemy, IMonster me)
         {
             // ダメージ量が多少揺れる
-            int damage = URandom.RandomChangeInt(base.Attack + me.Attack, CSysRate.PHYSICAL_SKILL_DAMAGE.VALUE);
-            
+            int damage = URandom.RandomChangeInt(Attack + me.Attack, CSysRate.PHYSICAL_SKILL_DAMAGE.VALUE);
+
             // 弱点等のダメージ欲正
             damage = BattleSystem.WeeknessDamage(enemy, this, damage);
             damage = BattleSystem.CriticalDamage(this, damage);
@@ -55,7 +55,7 @@ namespace KazApi.Domain._Monster._Skill
                 enemy.MonsterId,
                 enemy.Hp,
                 damage,
-                base.SkillId,
+                SkillId,
                 $"{enemy.MonsterName}は{damage}のダメージを受けた。")
                 );
 
@@ -66,12 +66,12 @@ namespace KazApi.Domain._Monster._Skill
         /// </summary>
         private int OneOrAll()
         {
-            if (base.TargetType == CTarget.ENEMY_RANDOM_OR_ALL.VALUE)
+            if (TargetType == CTarget.ENEMY_RANDOM_OR_ALL.VALUE)
             {
                 return URandom.RandomBool() ? CTarget.ENEMY_RANDOM.VALUE
                                             : CTarget.ENEMY_ALL.VALUE;
             }
-            return base.TargetType;
+            return TargetType;
 
         }
 

@@ -1,17 +1,19 @@
 ﻿using KazApi.Common._Const;
-using KazApi.Domain._Monster;
 using KazApi.Repository;
-using KazApi.Domain._Monster._State;
 using KazApi.DTO;
 using System.Text;
 using KazApi.Controller.Service;
 using CSLib.Lib;
+using KazApi.Domain.monster._State;
+using KazApi.Domain.monster;
+using KazApi.Domain._Factory;
+using KazApi.Domain._GameSystem;
 
 Console.WriteLine("Auto battle start...");
 
 IDatabase _posgre = new PostgreSQL();
 BattleService _service = new BattleService();
-
+MonsterFactory _monsterFactory = new MonsterFactory();
 
 int battleTimes = 3;
 for (int i = 0; i < battleTimes; i++)
@@ -31,14 +33,16 @@ for (int i = 0; i < battleTimes; i++)
 
         // モンスターDTO構築
         IEnumerable<MonsterDTO> monstersDTO =
-            _service.MappingToMonsterDTO(monstersFromDB, skillsFromDB, monsterSkillFromDB);
+            _monsterFactory.MappingToMonsterDTO(monstersFromDB, skillsFromDB, monsterSkillFromDB);
 
         // 参加モンスター（モンスター数はランダム）
         IEnumerable<MonsterDTO> battleMonstersDTO
-            = _service.MonsterSelector(monstersDTO, URandom.RandomInt(2, 7));
+            = BattleSystem.MonsterSelector(monstersDTO, URandom.RandomInt(2, 7));
 
         // 戦闘用モンスターを構築
-        IEnumerable<IMonster> battleMonsters = _service.CreateBattleMonsters(battleMonstersDTO);
+        IEnumerable<CodeDTO> stateCodeFromDB =_service.SelectStateCode();
+        IEnumerable<IMonster> battleMonsters 
+            = _monsterFactory.CreateBattleMonsters(battleMonstersDTO, stateCodeFromDB);
 
         // TODO 未実装 チーム決め
         ((List<IMonster>)battleMonsters).ForEach(e => e.DefineTeam(CTeam.A.VALUE));
@@ -57,7 +61,7 @@ for (int i = 0; i < battleTimes; i++)
         do
         {
             // 行動順決め
-            IEnumerable<IMonster> orderedMonsters = _service.ActionOrder(battleMonsters);
+            IEnumerable<IMonster> orderedMonsters = BattleSystem.ActionOrder(battleMonsters);
 
             // モンスタ達のーの行動
             foreach (IMonster me in orderedMonsters)

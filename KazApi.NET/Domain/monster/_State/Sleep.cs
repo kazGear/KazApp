@@ -3,7 +3,7 @@ using KazApi.Common._Const;
 using KazApi.Common._Log;
 using KazApi.DTO;
 
-namespace KazApi.Domain._Monster._State
+namespace KazApi.Domain.monster._State
 {
     /// <summary>
     /// 睡眠状態クラス
@@ -18,23 +18,23 @@ namespace KazApi.Domain._Monster._State
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public Sleep(string name, int stateType, int maxDuration) 
+        public Sleep(string name, int stateType, int maxDuration)
               : base(name, stateType, maxDuration)
         {
-            base.StateType = CStateType.SLEEP.VALUE;
+            StateType = CStateType.SLEEP.VALUE;
         }
 
-        public override IState DeepCopy() 
-            => new Sleep(base.Name, base.StateType, base.MaxDuration);
+        public override IState DeepCopy()
+            => new Sleep(Name, StateType, MaxDuration);
 
         public override void DisabledLogging(IMonster monster)
         {
             bool disableState = true;
 
-            base._Log.Logging(new BattleMetaData(
+            _Log.Logging(new BattleMetaData(
                 monster.MonsterId,
                 disableState,
-                base.Name,
+                Name,
                 $"{monster.MonsterName}は目覚めた！"));
 
         }
@@ -45,10 +45,10 @@ namespace KazApi.Domain._Monster._State
         public override void Impact(IMonster monster)
         {
             if (IsDisable()) return;
-            base._Log.Logging(new BattleMetaData(monster.MonsterId, $"{monster.MonsterName}は眠っている Zzz ..."));
+            _Log.Logging(new BattleMetaData(monster.MonsterId, $"{monster.MonsterName}は眠っている Zzz ..."));
 
             // 早く回復することがある                        
-            base.DurationCount += URandom.durationCountUp();    
+            DurationCount += URandom.durationCountUp();
         }
     }
 }

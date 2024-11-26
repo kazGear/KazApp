@@ -1,9 +1,9 @@
 ﻿using KazApi.Common._Const;
 using KazApi.Domain._GameSystem;
-using KazApi.Domain._Monster._State;
+using KazApi.Domain.monster._State;
 using KazApi.DTO;
 
-namespace KazApi.Domain._Monster._Skill
+namespace KazApi.Domain.monster._Skill
 {
     /// <summary>
     /// 状態スキルクラス
@@ -28,14 +28,14 @@ namespace KazApi.Domain._Monster._Skill
         {
             bool isPositive = POSITIVE_SKILLS.Where(e => e.VALUE == _state.StateType)
                                              .Count() >= 1;
-                        
+
             if (isPositive) // 有利スキル
             {
                 GivePositiveState(me);
             }
             else // 状態異常スキル
             {
-                GiveNegativeState(monsters, me);   
+                GiveNegativeState(monsters, me);
             }
         }
 
@@ -52,7 +52,7 @@ namespace KazApi.Domain._Monster._Skill
         /// </summary>
         private void GiveNegativeState(IEnumerable<IMonster> monsters, IMonster me)
         {
-            if (base.TargetType == CTarget.ENEMY_RANDOM.VALUE)
+            if (TargetType == CTarget.ENEMY_RANDOM.VALUE)
             {
                 // 単体付与
                 IMonster enemy = BattleSystem.SelectOneEnemy(monsters.ToList());

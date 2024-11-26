@@ -4,11 +4,12 @@ using KazApi.Common._Log;
 using KazApi.Controller.Service;
 using KazApi.Domain._Factory;
 using KazApi.Domain._GameSystem;
-using KazApi.Domain._Monster;
-using KazApi.Domain._Monster._Skill;
-using KazApi.Domain._Monster._State;
+using KazApi.Domain.monster;
+using KazApi.Domain.monster._Skill;
+using KazApi.Domain.monster._State;
 using KazApi.DTO;
 using KazApi.Repository;
+using KazApi.Repository.sql;
 using Microsoft.EntityFrameworkCore.Storage.Json;
 using System.Net;
 using System.Runtime.InteropServices;
@@ -74,13 +75,13 @@ UTimeMeasure.Start(); // SQL測定
 
 // DB読込み
 IEnumerable<MonsterDTO> monstersFromDB =
-    posgre.Select<MonsterDTO>(SQL.MonsterSQL.SelectMonsters());
+    posgre.Select<MonsterDTO>(MonsterSQL.SelectMonsters());
 IEnumerable<SkillDTO> skillFromDB =
-    posgre.Select<SkillDTO>(SQL.SkillSQL.SelectSkill());
+    posgre.Select<SkillDTO>(SkillSQL.SelectSkill());
 IEnumerable<MonsterSkillDTO> monsterSkillFromDB =
-    posgre.Select<MonsterSkillDTO>(SQL.MonsterSkillSQL.SelectMonsterSkill());
+    posgre.Select<MonsterSkillDTO>(MonsterSQL.SelectMonsterSkill());
 IEnumerable<CodeDTO> stateCodeFromDB =
-    posgre.Select<CodeDTO>(SQL.CodeSQL.SelectCode())
+    posgre.Select<CodeDTO>(CodeSQL.SelectCode())
           .Where(e => e.Category == CCodeType.STATE.VALUE);
 
 Print(UTimeMeasure.Stop()); // SQL測定
@@ -133,7 +134,7 @@ try
     while (onMoreBattle && enableBattle)
     {
         // 行動順決め
-        IEnumerable<IMonster> orderedMonsters = service.ActionOrder(battleMonsters);
+        IEnumerable<IMonster> orderedMonsters = BattleSystem.ActionOrder(battleMonsters);
 
         log.Logging(new BattleMetaData(">>> 行動順"));
         PrintAll(log.DumpMemory());
@@ -150,7 +151,7 @@ try
             }
 
             // 順番決め
-            service.WhoseTurn(me);
+            MessageInfo.WhoseTurn(me);
             PrintAll(log.DumpMemory());
 
             // 状態異常の効果
@@ -185,7 +186,7 @@ try
         PrintAll(log.DumpMemory());
 
         // 勝敗判定
-        service.BattleResult(battleMonsters);       
+        MessageInfo.BattleResult(battleMonsters);       
         PrintAll(log.DumpMemory());
 
         //if (existWinner || allLoser) break; 

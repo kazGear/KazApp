@@ -1,43 +1,49 @@
 ﻿using CSLib.Lib;
 using KazApi.Common._Const;
 using KazApi.Common._Log;
+using KazApi.DTO;
 
-namespace KazApi.Domain._Monster._State
+namespace KazApi.Domain.monster._State
 {
     /// <summary>
-    /// 猛毒状態クラス
+    /// 毒状態クラス
     /// </summary>
-    public class DeadlyPoison : IState
+    public class Poison : IState
     {
-        private static readonly double POISON_DAMAGE_RATE = 0.25;
-        private static readonly double ADJUST_RATE = 0.2;
+        private static readonly double POISON_DAMAGE_RATE = 0.1;
+        private static readonly double ADJUST_RATE = 0.4;
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public DeadlyPoison(string name, int stateType, int maxDuration)
-                     : base(name, stateType, maxDuration)
+        public Poison(StateDTO dto) : base(dto) { }
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public Poison(string name, int stateType, int maxDuration)
+               : base(name, stateType, maxDuration)
         {
-            base.StateType = CStateType.POISON.VALUE;
+            StateType = CStateType.POISON.VALUE;
         }
 
         public override IState DeepCopy()
-            => new DeadlyPoison(base.Name, base.StateType, base.MaxDuration);
+            => new Poison(Name, StateType, MaxDuration);
 
         public override void DisabledLogging(IMonster monster)
         {
             bool disableState = true;
 
-            base._Log.Logging(new BattleMetaData(
+            _Log.Logging(new BattleMetaData(
                 monster.MonsterId,
                 disableState,
-                base.Name,
-                $"{monster.MonsterName}の猛毒が消えたようだ。"));
+                Name,
+                $"{monster.MonsterName}の毒が消えたようだ。"));
 
         }
 
         /// <summary>
-        /// 強めの毒ダメージ
+        /// 毒ダメージを受ける
         /// </summary>
         public override void Impact(IMonster monster)
         {
@@ -48,8 +54,8 @@ namespace KazApi.Domain._Monster._State
             poisonDamage = URandom.RandomChangeInt(poisonDamage, ADJUST_RATE);
 
 
-            base._Log.Logging(new BattleMetaData(monster.MonsterId, $"猛毒に侵されている　..."));
-            base._Log.Logging(new BattleMetaData(
+            _Log.Logging(new BattleMetaData(monster.MonsterId, $"毒がまわってきた。。。"));
+            _Log.Logging(new BattleMetaData(
                 monster.MonsterId,
                 monster.Hp,
                 poisonDamage,
@@ -60,8 +66,7 @@ namespace KazApi.Domain._Monster._State
             monster.AcceptDamage(poisonDamage);
 
             // 早く回復することがある                        
-            base.DurationCount += URandom.durationCountUp();
-
+            DurationCount += URandom.durationCountUp();
         }
     }
 }

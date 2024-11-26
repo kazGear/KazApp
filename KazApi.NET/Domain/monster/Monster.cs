@@ -1,11 +1,11 @@
 ﻿using CSLib.Lib;
 using KazApi.Common._Const;
 using KazApi.Common._Log;
-using KazApi.Domain._Monster._Skill;
-using KazApi.Domain._Monster._State;
+using KazApi.Domain.monster._Skill;
+using KazApi.Domain.monster._State;
 using KazApi.DTO;
 
-namespace KazApi.Domain._Monster
+namespace KazApi.Domain.monster
 {
     /// <summary>
     /// モンスタークラウ
@@ -30,24 +30,24 @@ namespace KazApi.Domain._Monster
             ISkill skill = skills[randomSkillIndex];
             return skill;
         }
-        
+
         protected override void AttackMove(IEnumerable<IMonster> monsters, ISkill skill)
         {
-            string attackMessage = $"{base.MonsterName}は {skill.SkillName} を放った！";
+            string attackMessage = $"{MonsterName}は {skill.SkillName} を放った！";
 
             // 無害な攻撃のメッセージ
             if (skill.SkillType == CSkillType.NOT_MOVE.VALUE)
-                attackMessage = $"{base.MonsterName}は {skill.SkillName} ...";
+                attackMessage = $"{MonsterName}は {skill.SkillName} ...";
 
-            base._Log.Logging(new BattleMetaData(TARGET_NONE, attackMessage + "\n"));
-            
+            _Log.Logging(new BattleMetaData(TARGET_NONE, attackMessage + "\n"));
+
             skill.Use(monsters, this);
         }
 
         protected override void PositiveMove(IEnumerable<IMonster> monsters, ISkill skill)
         {
-            string attackMessage = $"{base.MonsterName}は {skill.SkillName} を放った！";
-            base._Log.Logging(new BattleMetaData(base.MonsterId, attackMessage + "\n"));
+            string attackMessage = $"{MonsterName}は {skill.SkillName} を放った！";
+            _Log.Logging(new BattleMetaData(MonsterId, attackMessage + "\n"));
             skill.Use([this], this);
         }
     }

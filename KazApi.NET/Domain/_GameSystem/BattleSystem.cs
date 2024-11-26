@@ -1,8 +1,10 @@
 ﻿using CSLib.Lib;
 using KazApi.Common._Const;
 using KazApi.Common._Log;
-using KazApi.Domain._Monster;
-using KazApi.Domain._Monster._Skill;
+using KazApi.Domain.monster;
+using KazApi.Domain.monster._Skill;
+using KazApi.Domain.monster._State;
+using KazApi.DTO;
 
 namespace KazApi.Domain._GameSystem
 {
@@ -102,6 +104,95 @@ namespace KazApi.Domain._GameSystem
                 result.Add(monster);
             }
             return result;
+        }
+
+        /// <summary>
+        /// モンスターをランダムに選出する
+        /// </summary>
+        public static IEnumerable<T> MonsterSelector<T>(IEnumerable<T> monsters, int needAmount)
+        {
+            if (monsters.Count() < needAmount) throw new Exception("モンスターの選択数が多すぎます。");
+            if (monsters.Count() < 2) throw new Exception("バトルは２体以上必要です。");
+
+            IList<T> result = [];
+            IList<int> usedMonsterId = [];
+
+            // 必要数のモンスタを用意
+            for (int i = 0; i < needAmount; i++)
+            {
+                int monsterId = URandom.RandomInt(0, monsters.Count());
+
+                // 同じモンスターは選べない
+                while (usedMonsterId.Contains(monsterId))
+                    // ランダムに選出
+                    monsterId = URandom.RandomInt(0, monsters.Count());
+
+                usedMonsterId.Add(monsterId);
+
+                T monster = monsters.ElementAt(monsterId);
+                result.Add(monster);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 行動順を決定する
+        /// </summary>
+        public static IEnumerable<IMonster> ActionOrder(IEnumerable<IMonster> monsters)
+        {
+            // スピードを乱数調整した上で順番決め
+            IList<IMonster> result =
+                monsters.Where(e => e.Hp > 0)
+                        .OrderByDescending(
+                            e => URandom.RandomChangeInt(e.Speed, 0.5))
+                        .ToList();
+
+            return result;
+        }
+
+        /// <summary>
+        /// 状態異常解除
+        /// </summary>
+        public static void DisabledStatus(IMonster me)
+        {
+            IEnumerable<IState> currentStatus = me.CurrentStatus();
+            ISet<IState> changedStatus = new HashSet<IState>();
+            foreach (IState state in currentStatus)
+            {
+                if (!state.IsDisable())
+                    changedStatus.Add(state);
+                else
+                    state.DisabledLogging(me);
+            }
+            me.UpdateStatus(changedStatus);
+            LOG.Logging(new BattleMetaData());
+        }
+
+        /// <summary>
+        /// 賭け金レートを算出
+        /// </summary>
+        /// <param name="monsters"></param>
+        public static void CalcBetRate(IEnumerable<MonsterDTO> monsters)
+        {
+            int monsterCount = monsters.Count() - 1; // モンスター数が多いほど倍率UP
+            double maxScore = monsters.Max(e => e.BetScore);
+
+            foreach (MonsterDTO monster in monsters)
+            {
+                if (maxScore == monster.BetScore)
+                {
+                    monster.BetRate = double.Parse(
+                        (maxScore / monster.BetScore * monsterCount * 1.15).ToString("F2")
+                        );
+                }
+                else
+                {
+                    monster.BetRate = double.Parse(
+                        (maxScore / monster.BetScore * monsterCount).ToString("F2")
+                        );
+                }
+            }
+
         }
     }
 }

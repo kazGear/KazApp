@@ -1,9 +1,9 @@
 ﻿using CSLib.Lib;
 using KazApi.DTO;
 using KazApi.Repository;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using KazApi.Repository.sql;
 
-namespace KazApi.Domain._Login
+namespace KazApi.Domain._User
 {
     /// <summary>
     /// 認証クラス
@@ -28,15 +28,16 @@ namespace KazApi.Domain._Login
         {
             string encryptPass = UAes.AesEncrypt(password);
 
-            var param = new {
+            var param = new
+            {
                 login_id = loginId,
                 login_pass = encryptPass
             };
-            
+
             // ユーザー検索
-            UserDTO? user = _posgre.Select<UserDTO>(SQL.AuthSQL.SelectLoginUser(), param)
+            UserDTO? user = _posgre.Select<UserDTO>(AuthSQL.SelectLoginUser(), param)
                                    .SingleOrDefault();
-            return user; 
+            return user;
         }
     }
 }
