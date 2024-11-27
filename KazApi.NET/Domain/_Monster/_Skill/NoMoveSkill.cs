@@ -1,6 +1,6 @@
 ﻿using KazApi.DTO;
 
-namespace KazApi.Domain.monster._Skill
+namespace KazApi.Domain._Monster._Skill
 {
     /// <summary>
     /// 行動しないスキル

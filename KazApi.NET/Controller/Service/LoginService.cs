@@ -5,16 +5,22 @@ namespace KazApi.Controller.Service
 {
     public class LoginService
     {
-        private readonly IConfiguration _appsettings;
+        private readonly IDatabase _posgre;
 
         public LoginService(IConfiguration configuration)
         {
-            _appsettings = configuration;
+            _posgre = new PostgreSQL(configuration);
         }
 
         // ユーザの一覧を取得
-        public IEnumerable<string> FetchLoginUsers(string name, string pass)
+        public IEnumerable<IUser> SelectLoginUsers(string name, string pass)
         {
+            object parameters = new
+            {
+                username = name,
+                password = pass
+            };
+
             string select = @"
                 SELECT username
                   FROM users
@@ -23,19 +29,7 @@ namespace KazApi.Controller.Service
 	               AND is_invalid = FALSE;
                 ";
 
-            object parameters = new
-            {
-                username = name,
-                password = pass
-            };
-
-            IDatabase postgre = new PostgreSQL(_appsettings);
-            IEnumerable<IUser> users = postgre.Select<IUser>(select, parameters); // Select<IUser> がだめ。具象クラスを使用する
-
-            IList<string> userNames = new List<string>();
-            foreach (IUser user in users) userNames.Add(user.UserName);
-
-            return userNames;
+            return _posgre.Select<IUser>(select, parameters);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using KazApi.Common._Const;
-using KazApi.Domain.monster._State;
+using KazApi.Domain._Monster._State;
 using System.Text.Json.Serialization;
 
 namespace KazApi.DTO

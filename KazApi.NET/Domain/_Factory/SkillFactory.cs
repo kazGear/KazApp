@@ -1,5 +1,5 @@
 ﻿using KazApi.Common._Const;
-using KazApi.Domain.monster._Skill;
+using KazApi.Domain._Monster._Skill;
 using KazApi.DTO;
 
 

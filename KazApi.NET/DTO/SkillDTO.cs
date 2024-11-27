@@ -1,5 +1,5 @@
 ﻿using System.Text.Json.Serialization;
-using KazApi.Domain.monster._Skill;
+using KazApi.Domain._Monster._Skill;
 
 namespace KazApi.DTO
 {

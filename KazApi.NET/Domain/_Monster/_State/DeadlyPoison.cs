@@ -2,7 +2,7 @@
 using KazApi.Common._Const;
 using KazApi.Common._Log;
 
-namespace KazApi.Domain.monster._State
+namespace KazApi.Domain._Monster._State
 {
     /// <summary>
     /// 猛毒状態クラス

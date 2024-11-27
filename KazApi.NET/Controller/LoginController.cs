@@ -1,8 +1,8 @@
 ﻿using CSLib.Lib;
 using KazApi.Controller.Service;
+using KazApi.Domain._User;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Text.Json.Serialization;
 
 namespace KazApi.Controller
 {
@@ -10,11 +10,11 @@ namespace KazApi.Controller
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private readonly LoginService LoginService;
+        private readonly LoginService _service;
 
         public LoginController(IConfiguration configuration)
         {
-            LoginService = new LoginService(configuration);
+            _service = new LoginService(configuration);
         }
 
         // ユーザ一覧を取得する
@@ -24,16 +24,15 @@ namespace KazApi.Controller
             // パスワード暗号化
             request.Password = UAes.AesEncrypt(request.Password);
 
-            IEnumerable<string> userNames = LoginService.FetchLoginUsers(request.UserName, request.Password);
-            return JsonConvert.SerializeObject(userNames);
-        }
+            IEnumerable<IUser> users = _service.SelectLoginUsers(request.UserName, request.Password);
 
-        public new class User
-        {
-            [JsonPropertyName("userName")]
-            public string UserName { get; set; }
-            [JsonPropertyName("password")]
-            public string Password { get; set; }
+            IList<string> userNames = new List<string>();
+
+            // ユーザー名一覧作成
+            foreach (IUser user in users) 
+                userNames.Add(user.UserName);
+
+            return JsonConvert.SerializeObject(userNames);
         }
     }
 }

@@ -5,9 +5,9 @@ using KazApi.Common._Const;
 using KazApi.Domain._ViewModel;
 using KazApi.DTO;
 using KazApi.Controller.Service;
-using KazApi.Domain.monster;
 using KazApi.Domain._Factory;
 using KazApi.Domain._GameSystem;
+using KazApi.Domain._Monster;
 
 
 

@@ -4,10 +4,10 @@ using KazApi.DTO;
 using System.Text;
 using KazApi.Controller.Service;
 using CSLib.Lib;
-using KazApi.Domain.monster._State;
-using KazApi.Domain.monster;
 using KazApi.Domain._Factory;
 using KazApi.Domain._GameSystem;
+using KazApi.Domain._Monster;
+using KazApi.Domain._Monster._State;
 
 Console.WriteLine("Auto battle start...");
 

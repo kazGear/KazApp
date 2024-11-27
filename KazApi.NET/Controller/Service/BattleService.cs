@@ -1,6 +1,6 @@
 ﻿using KazApi.Common._Const;
 using KazApi.Common._Log;
-using KazApi.Domain.monster;
+using KazApi.Domain._Monster;
 using KazApi.DTO;
 using KazApi.Repository;
 using KazApi.Repository.sql;

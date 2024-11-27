@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using KazApi.DTO;
 using KazApi.Controller.Service;
 using KazApi.Common._Filter;
+using KazApi.Domain._GameSystem;
 
 namespace KazApi.Controller
 {
@@ -42,8 +43,13 @@ namespace KazApi.Controller
         {
             try
             {
-                IEnumerable<MonsterRepostDTO> monsterReports = _service.SelectMonsterReport(monsterTypeId);
-                return JsonConvert.SerializeObject(monsterReports);
+                IEnumerable<MonsterReportDTO> report = _service.SelectMonsterReport(monsterTypeId);
+
+                // 勝率を算出
+                IEnumerable<MonsterReportDTO> editedReport
+                    = BattleSystem.ResultsOfMonster(report);
+
+                return JsonConvert.SerializeObject(editedReport);
             }
             catch (Exception e)
             {
@@ -65,9 +71,11 @@ namespace KazApi.Controller
                 DateTime? dateFrom = from == null ? null : DateTime.Parse(from);
                 DateTime? dateTo = to == null ? null : DateTime.Parse(to);
 
-                IEnumerable<BattleReportDTO> battleReports 
+                IEnumerable<BattleReportDTO> battleReports
                     = _service.SelectBattleReport(battleScale, dateFrom, dateTo);
-
+                
+                IEnumerable<BattleReportDTO> editedReport = BattleSystem.ResultsOfBattle(battleReports);
+                     
                 return JsonConvert.SerializeObject(battleReports);
             }
             catch (Exception e)

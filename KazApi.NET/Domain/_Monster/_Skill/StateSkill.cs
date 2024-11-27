@@ -1,9 +1,9 @@
 ﻿using KazApi.Common._Const;
 using KazApi.Domain._GameSystem;
-using KazApi.Domain.monster._State;
+using KazApi.Domain._Monster._State;
 using KazApi.DTO;
 
-namespace KazApi.Domain.monster._Skill
+namespace KazApi.Domain._Monster._Skill
 {
     /// <summary>
     /// 状態スキルクラス

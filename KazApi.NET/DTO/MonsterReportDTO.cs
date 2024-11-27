@@ -1,6 +1,6 @@
 ﻿namespace KazApi.DTO
 {
-    public class MonsterRepostDTO
+    public class MonsterReportDTO
     {
         public int MonsterId { get; set; }
         public string MonsterName { get; set; }

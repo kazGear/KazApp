@@ -1,7 +1,7 @@
 ﻿using KazApi.Common._Log;
 using KazApi.DTO;
 
-namespace KazApi.Domain.monster._State
+namespace KazApi.Domain._Monster._State
 {
     /// <summary>
     /// 状態異常インターフェイス

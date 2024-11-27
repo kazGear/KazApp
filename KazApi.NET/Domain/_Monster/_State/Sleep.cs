@@ -1,9 +1,10 @@
 ﻿using CSLib.Lib;
 using KazApi.Common._Const;
 using KazApi.Common._Log;
+
 using KazApi.DTO;
 
-namespace KazApi.Domain.monster._State
+namespace KazApi.Domain._Monster._State
 {
     /// <summary>
     /// 睡眠状態クラス

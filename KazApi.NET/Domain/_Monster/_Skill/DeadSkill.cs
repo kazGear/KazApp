@@ -4,7 +4,7 @@ using KazApi.Common._Log;
 using KazApi.Domain._GameSystem;
 using KazApi.DTO;
 
-namespace KazApi.Domain.monster._Skill
+namespace KazApi.Domain._Monster._Skill
 {
     /// <summary>
     /// 即死スキルクラス

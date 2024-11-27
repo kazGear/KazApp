@@ -1,9 +1,9 @@
 ﻿using CSLib.Lib;
 using KazApi.Common._Const;
 using KazApi.Common._Log;
-using KazApi.Domain.monster;
-using KazApi.Domain.monster._Skill;
-using KazApi.Domain.monster._State;
+using KazApi.Domain._Monster;
+using KazApi.Domain._Monster._Skill;
+using KazApi.Domain._Monster._State;
 using KazApi.DTO;
 
 namespace KazApi.Domain._GameSystem
@@ -192,7 +192,46 @@ namespace KazApi.Domain._GameSystem
                         );
                 }
             }
-
         }
+
+        /// <summary>
+        /// モンスター毎の戦績、勝率の加工
+        /// </summary>
+        /// <param name="report"></param>
+        /// <returns></returns>
+        public static IEnumerable<MonsterReportDTO> ResultsOfMonster(IEnumerable<MonsterReportDTO> report)
+        {
+            IEnumerable<MonsterReportDTO> result 
+                = report.Select(e => new MonsterReportDTO
+                {
+                    MonsterId = e.MonsterId,
+                    MonsterName = e.MonsterName,
+                    BattleCount = e.BattleCount,
+                    Wins = e.Wins,
+                    WinRate = (e.Wins / (double)e.BattleCount * 100).ToString("N2") + "%"
+                });
+            return result;
+        }
+
+        /// <summary>
+        /// バトル毎のレポート加工
+        /// </summary>
+        /// <param name="report"></param>
+        public static IEnumerable<BattleReportDTO> ResultsOfBattle(IEnumerable<BattleReportDTO> report)
+        {
+            IEnumerable<BattleReportDTO> result 
+                = report.Select(e => new BattleReportDTO
+                {
+                    BattleId = e.BattleId,
+                    BattleEndDateStr = e.BattleEndDate.ToString().Substring(0, 10),
+                    BattleEndTimeStr = e.BattleEndTime.ToString().Substring(0, 8),
+                    Serial = e.Serial,
+                    MonsterId = e.MonsterId,
+                    MonsterName = e.MonsterName,
+                    IsWin = e.IsWin
+                });
+            return result;
+        }
+
     }
 }

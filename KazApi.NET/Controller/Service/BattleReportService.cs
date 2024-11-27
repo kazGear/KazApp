@@ -42,7 +42,7 @@ namespace KazApi.Controller.Service
         /// モンスター毎のレポートを取得
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<MonsterRepostDTO> SelectMonsterReport(string monsterTypeId)
+        public IEnumerable<MonsterReportDTO> SelectMonsterReport(string monsterTypeId)
         {
             try
             {
@@ -50,23 +50,11 @@ namespace KazApi.Controller.Service
                 {
                     monster_type = int.Parse(monsterTypeId)
                 };
-
-                IEnumerable<MonsterRepostDTO> report
-                    = _posgre.Select<MonsterRepostDTO>(
+                IEnumerable<MonsterReportDTO> report
+                    = _posgre.Select<MonsterReportDTO>(
                         ReportSQL.SelectMonsterReport(param.monster_type), param);
-
-                // 勝率を算出
-                IEnumerable<MonsterRepostDTO> editedReport
-                    = report.Select(e => new MonsterRepostDTO
-                    {
-                        MonsterId = e.MonsterId,
-                        MonsterName = e.MonsterName,
-                        BattleCount = e.BattleCount,
-                        Wins = e.Wins,
-                        WinRate = (e.Wins / (double)e.BattleCount * 100).ToString("N2") + "%"
-                    });
-
-                return editedReport;
+                                
+                return report;
             }
             catch (Exception)
             {
@@ -89,24 +77,13 @@ namespace KazApi.Controller.Service
 
                 IEnumerable<BattleReportDTO> report
                     = _posgre.Select<BattleReportDTO>(
-                        ReportSQL.SelectBattleReport(param.battle_scale,
-                                                         param.from,
-                                                         param.to
-                                                         ), param);
-
-                IEnumerable<BattleReportDTO> editedReport
-                    = report.Select(e => new BattleReportDTO
-                    {
-                        BattleId = e.BattleId,
-                        BattleEndDateStr = e.BattleEndDate.ToString().Substring(0, 10),
-                        BattleEndTimeStr = e.BattleEndTime.ToString().Substring(0, 8),
-                        Serial = e.Serial,
-                        MonsterId = e.MonsterId,
-                        MonsterName = e.MonsterName,
-                        IsWin = e.IsWin
-                    });
-
-                return editedReport;
+                        ReportSQL.SelectBattleReport(
+                            param.battle_scale,
+                            param.from,
+                            param.to
+                            ), param);
+                           
+                return report;
             }
             catch (Exception)
             {

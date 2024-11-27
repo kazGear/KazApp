@@ -3,7 +3,7 @@ using KazApi.Common._Const;
 using KazApi.Common._Log;
 using KazApi.DTO;
 
-namespace KazApi.Domain.monster._Skill
+namespace KazApi.Domain._Monster._Skill
 {
     /// <summary>
     /// 回復スキルクラス
