@@ -42,17 +42,22 @@ namespace KazApi.Controller.Service
         /// モンスター毎のレポートを取得
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<MonsterReportDTO> SelectMonsterReport(string monsterTypeId)
+        public IEnumerable<MonsterReportDTO> SelectMonsterReport(
+            int monsterTypeId,
+            int sortType,
+            bool isAscOrder)
         {
             try
             {
                 var param = new
                 {
-                    monster_type = int.Parse(monsterTypeId)
+                    monster_type = monsterTypeId,
+                    sort_type = sortType,
+                    is_asc_order = isAscOrder
                 };
                 IEnumerable<MonsterReportDTO> report
                     = _posgre.Select<MonsterReportDTO>(
-                        ReportSQL.SelectMonsterReport(param.monster_type), param);
+                        ReportSQL.SelectMonsterReport(param), param);
                                 
                 return report;
             }
@@ -63,14 +68,14 @@ namespace KazApi.Controller.Service
         }
 
         public IEnumerable<BattleReportDTO> SelectBattleReport(
-            string battleScale, DateTime? dateFrom, DateTime? dateTo
+            int battleScale, DateTime? dateFrom, DateTime? dateTo
         )
         {
             try
             {
                 var param = new
                 {
-                    battle_scale = int.Parse(battleScale),
+                    battle_scale = battleScale,
                     from = dateFrom,
                     to = dateTo
                 };

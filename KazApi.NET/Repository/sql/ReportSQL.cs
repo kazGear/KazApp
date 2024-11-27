@@ -1,4 +1,6 @@
-﻿namespace KazApi.Repository.sql
+﻿using KazApi.Common._Const;
+
+namespace KazApi.Repository.sql
 {
     /// <summary>
     /// SQL文格納クラス
@@ -19,7 +21,8 @@
 
         public static string SelectMonsterReport(dynamic param)
         {
-            string WHERE = PartialMonsterReport(param);
+            string WHERE = PartialWhereMonsterReport(param.monster_type);
+            string ORDER_BY = PartialOrderByMonsterReport(param.sort_type , param.is_asc_order);
 
             string SQL = $@"
                 SELECT m.monster_id          AS MonsterId
@@ -33,17 +36,54 @@
                     ON m.monster_id = br.monster_id
                 {WHERE}
               GROUP BY m.monster_id
-              ORDER BY MonsterName ASC ;
+             {ORDER_BY} ;
             ";
 
             return SQL;
         }
-        public static string PartialMonsterReport(int monsterType)
+        public static string PartialWhereMonsterReport(int monsterType)
         {
             return monsterType > 0
                 ? $"WHERE monster_type = @monster_type"
                 : "";
         }
+        public static string PartialOrderByMonsterReport(int sortKey, bool isAscOrder)
+        {
+            string result = string.Empty;
+
+            if (sortKey == CReportSortType.MONSTER_NAME.VALUE)
+            {
+                result = $@" ORDER BY MonsterName {IsAscOrder(isAscOrder)} ";
+            }
+            else if (sortKey == CReportSortType.WIN_COUNT.VALUE)
+            {
+                result = $@" ORDER BY Wins {IsAscOrder(isAscOrder)}
+                                 , MonsterName {IsAscOrder(isAscOrder)}
+                ";
+            }
+            else if (sortKey == CReportSortType.BATTLE_COUNT.VALUE)
+            {
+                result = $@" ORDER BY BattleCount {IsAscOrder(isAscOrder)}
+                                    , MonsterName {IsAscOrder(isAscOrder)}
+                ";
+            }
+            else if (sortKey == CReportSortType.WINS_RATE.VALUE)
+            {
+                result = $@" ORDER BY sum(CASE WHEN is_win = TRUE
+                                               THEN 1
+                                               ELSE 0 END ) / count(*)::real
+                                                  {IsAscOrder(isAscOrder)}
+                                    , MonsterName {IsAscOrder(isAscOrder)}
+                ";
+            } 
+            else // 初期表示のソート
+            {
+                result = " ORDER BY MonsterName ASC" ;
+            }
+            return result;
+        }
+        public static string IsAscOrder(bool isAscOrder)
+            => isAscOrder ? "ASC" : "DESC";
 
         public static string SelectBattleReport(int battleScale, DateTime? from, DateTime? to)
         {

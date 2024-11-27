@@ -39,11 +39,15 @@ namespace KazApi.Controller
         /// モンスターのレポートを取得
         /// </summary>
         [HttpPost("api/battleReport/monsterReport")]
-        public ActionResult<string> SelectMonsterReport([FromQuery] string monsterTypeId)
+        public ActionResult<string> SelectMonsterReport(
+            [FromQuery] int monsterTypeId,
+            [FromQuery] int sortType,
+            [FromQuery] bool isAscOrder)
         {
             try
             {
-                IEnumerable<MonsterReportDTO> report = _service.SelectMonsterReport(monsterTypeId);
+                IEnumerable<MonsterReportDTO> report 
+                    = _service.SelectMonsterReport(monsterTypeId, sortType, isAscOrder);
 
                 // 勝率を算出
                 IEnumerable<MonsterReportDTO> editedReport
@@ -62,7 +66,7 @@ namespace KazApi.Controller
         /// </summary>
         [HttpPost("api/battleReport/battleReport")]
         public ActionResult<string> SelectBattleReport(
-            [FromQuery] string battleScale,
+            [FromQuery] int battleScale,
             [FromQuery] string? from,
             [FromQuery] string? to)
         {
