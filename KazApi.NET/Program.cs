@@ -24,7 +24,7 @@ public class Program
                         options.Listen(IPAddress.Any, 5001, listenOptions =>
                         {
                             listenOptions.UseHttps(
-                                "/etc/letsencrypt/live/try-the-work.net/certificate.pfx",
+                                "/etc/letsencrypt/live/kazapp-trial.com/kazapp-trial.pfx",
                                 "kaz_5050");
                         });
                     }
