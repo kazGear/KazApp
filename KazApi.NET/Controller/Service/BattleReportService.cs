@@ -1,5 +1,5 @@
-﻿using KazApi.Common._Const;
-using KazApi.DTO;
+﻿using KazApi.Domain._Const;
+using KazApi.Domain.DTO;
 using KazApi.Repository;
 using KazApi.Repository.sql;
 

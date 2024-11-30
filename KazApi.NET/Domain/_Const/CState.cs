@@ -1,6 +1,6 @@
-﻿using KazApi.DTO;
+﻿using KazApi.Domain.DTO;
 
-namespace KazApi.Common._Const
+namespace KazApi.Domain._Const
 {
     /// <summary>
     /// 状態定数
@@ -48,7 +48,7 @@ namespace KazApi.Common._Const
         /// 自動回復
         /// </summary>
         public static readonly CStateType AUTOHEAL = new(8, "自動回復");
-       
+
     }
 
     /// <summary>

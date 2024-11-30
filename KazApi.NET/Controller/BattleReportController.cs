@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using KazApi.DTO;
 using KazApi.Controller.Service;
 using KazApi.Common._Filter;
 using KazApi.Domain._GameSystem;
+using KazApi.Domain.DTO;
 
 namespace KazApi.Controller
 {

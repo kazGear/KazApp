@@ -1,4 +1,4 @@
-﻿namespace KazApi.Common._Const
+﻿namespace KazApi.Domain._Const
 {
     public class CTarget : Enumeration<int>
     {
@@ -10,38 +10,38 @@
         /// <summary>
         /// 無し
         /// </summary>
-        public static readonly CTarget NONE = new(0, "NONE");     
+        public static readonly CTarget NONE = new(0, "NONE");
         /// <summary>
         /// 敵ランダム
         /// </summary>
-        public static readonly CTarget ENEMY_RANDOM = new (1, "ENEMY_RANDOM");
+        public static readonly CTarget ENEMY_RANDOM = new(1, "ENEMY_RANDOM");
         /// <summary>
         /// 敵全体
         /// </summary>
-        public static readonly CTarget ENEMY_ALL = new (2, "ENEMY_ALL");
+        public static readonly CTarget ENEMY_ALL = new(2, "ENEMY_ALL");
         /// <summary>
         /// 敵ランダム・敵全体
         /// </summary>
-        public static readonly CTarget ENEMY_RANDOM_OR_ALL = new (3, "ENEMY_RANDOM_OR_ALL");
+        public static readonly CTarget ENEMY_RANDOM_OR_ALL = new(3, "ENEMY_RANDOM_OR_ALL");
         /// <summary>
         /// 敵ランダム・複数回
         /// </summary>
-        public static readonly CTarget ENEMY_RANDOM_SOME_TIMES = new (4, "ENEMY_RANDOM_SOME_TIMES");
+        public static readonly CTarget ENEMY_RANDOM_SOME_TIMES = new(4, "ENEMY_RANDOM_SOME_TIMES");
         /// <summary>
         /// 自身
         /// </summary>
-        public static readonly CTarget ME = new (5, "ME");
+        public static readonly CTarget ME = new(5, "ME");
         /// <summary>
         /// 味方ランダム
         /// </summary>
-        public static readonly CTarget FRIEND_RANDOM = new (6, "FRIEND_RANDOM");
+        public static readonly CTarget FRIEND_RANDOM = new(6, "FRIEND_RANDOM");
         /// <summary>
         /// 味方全体
         /// </summary>
-        public static readonly CTarget FRIEND_ALL = new (7, "FRIEND_ALL");
+        public static readonly CTarget FRIEND_ALL = new(7, "FRIEND_ALL");
         /// <summary>
         /// 味方ランダム・味方全体
         /// </summary>
-        public static readonly CTarget FRIEND_RANDOM_OR_ALL = new (8, "FRIEND_RANDOM_OR_ALL");
+        public static readonly CTarget FRIEND_RANDOM_OR_ALL = new(8, "FRIEND_RANDOM_OR_ALL");
     }
 }

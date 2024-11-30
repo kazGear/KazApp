@@ -1,4 +1,4 @@
-﻿namespace KazApi.Common._Const
+﻿namespace KazApi.Domain._Const
 {
     /// <summary>
     /// 自然属性定数

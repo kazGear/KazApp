@@ -1,4 +1,6 @@
 ﻿using CSLib.Lib;
+using KazApi.Domain._Const;
+using KazApi.Domain.DTO;
 using KazApi.Repository;
 using KazApi.Repository.sql;
 
@@ -19,11 +21,11 @@ namespace KazApi.Controller.Service
         /// 登録済ユーザーを取得
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<DTO.UserDTO> RegistedSelectUsers()
-            => _posgre.Select<DTO.UserDTO>(UserSQL.SelecUsers());
+        public IEnumerable<UserDTO> RegistedSelectUsers()
+            => _posgre.Select<UserDTO>(UserSQL.SelecUsers());
 
         // ユーザー登録
-        public bool UserRegist(
+        public bool InsertUser(
             string LoginId,
             string Password,
             string DispName,
@@ -44,6 +46,31 @@ namespace KazApi.Controller.Service
 
                 _posgre.Execute(UserSQL.InsertUser(), param);
             }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool InsertStartUpMonsters(string loginId)
+        {
+            try
+            {
+                DateTime now = DateTime.Now;
+                               
+                foreach (CMonsterType monsterType in CMonsterType.START_UP)
+                {
+                    var param = new
+                    {
+                        user_id = loginId,
+                        monster_type_id = monsterType.VALUE,
+                        acquired_date = now,
+                        not_use_this = false
+                    };
+                    _posgre.Execute(UserSQL.InsertStartUpMonsters(), param);
+                }
+            } 
             catch (Exception)
             {
                 return false;

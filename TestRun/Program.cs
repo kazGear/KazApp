@@ -1,13 +1,13 @@
 ﻿using CSLib.Lib;
-using KazApi.Common._Const;
 using KazApi.Common._Log;
 using KazApi.Controller.Service;
+using KazApi.Domain._Const;
 using KazApi.Domain._Factory;
 using KazApi.Domain._GameSystem;
 using KazApi.Domain._Monster;
 using KazApi.Domain._Monster._Skill;
 using KazApi.Domain._Monster._State;
-using KazApi.DTO;
+using KazApi.Domain.DTO;
 using KazApi.Repository;
 using KazApi.Repository.sql;
 using Microsoft.EntityFrameworkCore.Storage.Json;

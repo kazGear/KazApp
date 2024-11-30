@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using KazApi.Domain._Monster._Skill;
 
-namespace KazApi.DTO
+namespace KazApi.Domain.DTO
 {
     /// <summary>
     /// スキルパラメータクラス

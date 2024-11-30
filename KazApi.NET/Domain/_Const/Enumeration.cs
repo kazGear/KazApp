@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace KazApi.Common._Const
+namespace KazApi.Domain._Const
 {
     /// <summary>
     /// 定数値既定クラス
@@ -51,7 +51,7 @@ namespace KazApi.Common._Const
                 {
                     result.Add(field.GetValue(fields) ?? "");
                 }
-                catch (ArgumentException) 
+                catch (ArgumentException)
                 { }
             }
             return result;

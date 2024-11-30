@@ -1,7 +1,7 @@
-﻿using KazApi.Common._Const;
-using KazApi.Common._Log;
+﻿using KazApi.Common._Log;
+using KazApi.Domain._Const;
 using KazApi.Domain._Monster;
-using KazApi.DTO;
+using KazApi.Domain.DTO;
 using KazApi.Repository;
 using KazApi.Repository.sql;
 using System.Transactions;

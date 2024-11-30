@@ -2,7 +2,7 @@
 using CSLib.Lib;
 using KazApi.Common._Log;
 using KazApi.Domain._GameSystem;
-using KazApi.DTO;
+using KazApi.Domain.DTO;
 
 namespace KazApi.Domain._Monster._Skill
 {

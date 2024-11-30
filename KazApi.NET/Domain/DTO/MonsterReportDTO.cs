@@ -1,4 +1,4 @@
-﻿namespace KazApi.DTO
+﻿namespace KazApi.Domain.DTO
 {
     public class MonsterReportDTO
     {

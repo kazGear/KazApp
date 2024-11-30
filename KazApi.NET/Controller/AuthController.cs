@@ -1,6 +1,6 @@
 ﻿using CSLib.Lib;
 using KazApi.Domain._User;
-using KazApi.DTO;
+using KazApi.Domain.DTO;
 using KazApi.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;

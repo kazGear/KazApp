@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using KazApi.Controller.Service;
-using KazApi.DTO;
 using KazApi.Repository;
 using KazApi.Repository.sql;
+using KazApi.Domain.DTO;
 
 namespace KazApi.Controller
 {
@@ -53,7 +53,8 @@ namespace KazApi.Controller
                 error >>> エラーページへ
                  */
 
-                bool result = _service.UserRegist(LoginId, Password, DispName, DispShortName);
+                bool result = _service.InsertUser(LoginId, Password, DispName, DispShortName);
+                result = _service.InsertStartUpMonsters(LoginId);
                 return true;
             }
             catch (Exception)
@@ -63,13 +64,13 @@ namespace KazApi.Controller
         }
 
         [HttpPost("api/user/loginUser")]
-        public UserDTO? SelectUser([FromQuery] string? userName)
+        public ActionResult<string?> SelectUser([FromQuery] string? loginId)
         {
-            if (userName == null) return null;
-
-            var param = new { disp_name = userName };
-            return _posgre.Select<UserDTO>(UserSQL.SelectLoginUser(), param)
-                          .SingleOrDefault();
+            var param = new { login_id = loginId };
+            UserDTO? user = _posgre.Select<UserDTO>(UserSQL.SelectLoginUser(), param)
+                                     .SingleOrDefault();
+            string? result = user?.DispName;
+            return JsonConvert.SerializeObject(result);
         }
     }
 }

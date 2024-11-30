@@ -1,5 +1,4 @@
-﻿
-namespace KazApi.DTO
+﻿namespace KazApi.Domain.DTO
 {
     public class UserDTO
     {
@@ -18,4 +17,3 @@ namespace KazApi.DTO
         public int LossesLostCash { get; set; }
     }
 }
- 

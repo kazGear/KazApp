@@ -1,4 +1,4 @@
-﻿using KazApi.Common._Const;
+﻿using KazApi.Domain._Const;
 
 namespace KazApi.Repository.sql
 {

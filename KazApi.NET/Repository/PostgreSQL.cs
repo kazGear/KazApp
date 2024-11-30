@@ -1,5 +1,5 @@
 ﻿using Dapper;
-using KazApi.Common._Const;
+using KazApi.Domain._Const;
 using Npgsql;
 using System.Data;
 

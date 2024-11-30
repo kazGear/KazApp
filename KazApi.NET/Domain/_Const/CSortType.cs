@@ -1,4 +1,4 @@
-﻿namespace KazApi.Common._Const
+﻿namespace KazApi.Domain._Const
 {
     public class CSortType
     {
@@ -18,7 +18,7 @@
         /// <summary>
         /// 初期状態ソート
         /// </summary>
-        public static readonly CReportSortType DEFAULT = new (0, "DEFAULT");
+        public static readonly CReportSortType DEFAULT = new(0, "DEFAULT");
         /// <summary>
         /// モンスター名
         /// </summary>

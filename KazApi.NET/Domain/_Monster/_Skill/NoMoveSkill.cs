@@ -1,4 +1,4 @@
-﻿using KazApi.DTO;
+﻿using KazApi.Domain.DTO;
 
 namespace KazApi.Domain._Monster._Skill
 {

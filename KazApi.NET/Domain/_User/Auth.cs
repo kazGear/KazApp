@@ -1,5 +1,5 @@
 ﻿using CSLib.Lib;
-using KazApi.DTO;
+using KazApi.Domain.DTO;
 using KazApi.Repository;
 using KazApi.Repository.sql;
 

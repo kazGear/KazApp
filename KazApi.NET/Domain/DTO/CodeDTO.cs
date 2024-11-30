@@ -1,4 +1,4 @@
-﻿namespace KazApi.DTO
+﻿namespace KazApi.Domain.DTO
 {
     /// <summary>
     /// コードパラメータ for DB

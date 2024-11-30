@@ -1,4 +1,4 @@
-﻿namespace KazApi.Common._Const
+﻿namespace KazApi.Domain._Const
 {
     /// <summary>
     /// モンスタータイプ定数
@@ -48,5 +48,21 @@
 
         public static readonly CMonsterType ボルダー = new(31, "ボルダー");
         public static readonly CMonsterType パンプキンボム = new(32, "パンプキンボム");
+
+        // ユーザ登録初期から登場するモンスターたち
+        public static readonly IList<CMonsterType> START_UP = new List<CMonsterType>
+        {
+            ラビ,
+            カーミラ,
+            キラービー,
+            ゴブリン,
+            マシンゴーレム,
+            ハーピー,
+            アーマーナイト,
+            マジシャン,
+            マイコニド,
+            ニードルバード
+        };
+
     }
 }

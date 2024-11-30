@@ -20,9 +20,9 @@
         public static string SelectLoginUser()
         {
             string SQL = @"
-                SELECT disp_name
+                SELECT disp_name AS DispName
                   FROM m_user
-                 WHERE disp_name = @disp_name ;
+                 WHERE login_id = @login_id ;
             ";
             return SQL;
         }
@@ -46,6 +46,20 @@
                     0                   -- losses_lost_cash
                 ) ;
                 ";
+            return SQL;
+        }
+
+        public static string InsertStartUpMonsters()
+        {
+            string SQL = @"
+                INSERT INTO m_usable_monster_types VALUES
+                (
+                    @user_id,
+                    @monster_type_id,
+                    @acquired_date,
+                    @not_use_this
+                ) ;
+            ";
             return SQL;
         }
     }

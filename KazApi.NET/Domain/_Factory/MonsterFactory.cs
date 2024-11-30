@@ -1,8 +1,8 @@
-﻿using KazApi.Common._Const;
+﻿using KazApi.Domain._Const;
 using KazApi.Domain._Monster;
 using KazApi.Domain._Monster._Skill;
 using KazApi.Domain._Monster._State;
-using KazApi.DTO;
+using KazApi.Domain.DTO;
 
 namespace KazApi.Domain._Factory
 {

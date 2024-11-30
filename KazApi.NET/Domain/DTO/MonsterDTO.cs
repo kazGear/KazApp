@@ -1,7 +1,7 @@
 ﻿using KazApi.Domain._Monster;
 using System.Text.Json.Serialization;
 
-namespace KazApi.DTO
+namespace KazApi.Domain.DTO
 {
     /// <summary>
     /// モンスターパラメータクラス
