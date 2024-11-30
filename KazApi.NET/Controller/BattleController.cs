@@ -8,6 +8,7 @@ using KazApi.Domain._GameSystem;
 using KazApi.Domain._Monster;
 using KazApi.Domain._Const;
 using KazApi.Domain.DTO;
+using Microsoft.CodeAnalysis;
 
 
 
@@ -32,12 +33,12 @@ namespace KazApi.Controller
         /// 初期処理
         /// </summary>
         [HttpPost("api/battle/init")]
-        public ActionResult<string> Init([FromQuery] int selectMonstersCount)
+        public ActionResult<string> Init([FromQuery] int selectMonstersCount, [FromQuery] string loginId)
         {
             try
             {
                 // モンスターデータ等の読込み
-                IEnumerable<MonsterDTO> monstersFromDB = _service.SelectMonsters();
+                IEnumerable<MonsterDTO> monstersFromDB = _service.SelectMonsters(loginId);
                 IEnumerable<SkillDTO> skillsFromDB = _service.SelectSkills();
                 IEnumerable<MonsterSkillDTO> monsterSkillFromDB = _service.SelectMonsterSkills();
 
@@ -117,6 +118,7 @@ namespace KazApi.Controller
             IEnumerable<MonsterDTO> monstersDTO = _monsterFactory.ConvertToDTO(battleMonsters);
 
             BattleViewModel model = new BattleViewModel();
+            _logger.Logging(new BattleMetaData());
             model.Monsters = monstersDTO;
             model.BattleLog = _logger.DumpMemory();
             
@@ -124,7 +126,7 @@ namespace KazApi.Controller
         }
 
         /// <summary>
-        /// 勝敗結果を記録
+        /// 勝敗結果を記録（モンスター）
         /// </summary>
         [HttpPost("api/battle/recordResults")]
         public ActionResult<bool> RecordResults([FromBody] IEnumerable<MonsterDTO> monsters)
@@ -133,6 +135,34 @@ namespace KazApi.Controller
             TimeSpan endTime = new TimeSpan(endDate.Ticks);
 
             return _service.InsertBattleResult(monsters, endDate, endTime);
+        }
+
+        /// <summary>
+        /// 勝敗結果を記録（ユーザー）
+        /// </summary>
+        [HttpPost("api/user/recordUserResults")]
+        public ActionResult<bool> RecordUserResults(
+            [FromQuery] int betMonsterId,
+            [FromQuery] int betGil,
+            [FromQuery] decimal betRate,
+            [FromQuery] int winningMonsterId,
+            [FromQuery] string loginId)
+        {
+            try
+            {
+                if (winningMonsterId <= 0) return false;
+
+                bool hit = false;
+                if (betMonsterId == winningMonsterId) hit = true;
+                
+                _service.UpdateUserResults(hit, betGil, betRate, loginId);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
+            return true;
         }
     }
 }

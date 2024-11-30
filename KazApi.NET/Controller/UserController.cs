@@ -67,8 +67,10 @@ namespace KazApi.Controller
         public ActionResult<string?> SelectUser([FromQuery] string? loginId)
         {
             var param = new { login_id = loginId };
+            
             UserDTO? user = _posgre.Select<UserDTO>(UserSQL.SelectLoginUser(), param)
-                                     .SingleOrDefault();
+                                   .SingleOrDefault();
+
             string? result = user?.DispName;
             return JsonConvert.SerializeObject(result);
         }

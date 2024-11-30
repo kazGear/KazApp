@@ -20,5 +20,18 @@
             return SQL;
         }
 
+        public static string InsertUserResult()
+        {
+            string SQL = $@"
+                UPDATE m_user
+                   SET cash             = cash + @cash
+                     , wins             = wins + @wins
+                     , wins_get_cash    = wins_get_cash + @wins_get_cash
+                     , losses           = losses + @losses
+                     , losses_lost_cash = losses_lost_cash + @losses_lost_cash
+                 WHERE login_id = @login_id ;
+            ";
+            return SQL;
+        }
     }
 }

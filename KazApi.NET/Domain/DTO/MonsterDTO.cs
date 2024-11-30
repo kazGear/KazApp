@@ -11,7 +11,7 @@ namespace KazApi.Domain.DTO
         [JsonPropertyName("MonsterId")]
         public int MonsterId { get; set; }
         [JsonPropertyName("MonsterName")]
-        public string MonsterName { get; set; }
+        public string? MonsterName { get; set; }
         [JsonPropertyName("MonsterType")]
         public int MonsterType { get; set; }
         [JsonPropertyName("Hp")]

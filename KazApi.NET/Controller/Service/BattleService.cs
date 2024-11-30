@@ -35,8 +35,14 @@ namespace KazApi.Controller.Service
         /// <summary>
         /// モンスターデータの読込み
         /// </summary>
-        public IEnumerable<MonsterDTO> SelectMonsters()
-            => _posgre.Select<MonsterDTO>(MonsterSQL.SelectMonsters());
+        public IEnumerable<MonsterDTO> SelectMonsters(string? loginId = null)
+        {
+            var param = new
+            {
+                login_id = loginId
+            };
+            return _posgre.Select<MonsterDTO>(MonsterSQL.SelectMonsters(), param);
+        }
 
         /// <summary>
         /// スキルーデータの読込み
@@ -55,7 +61,7 @@ namespace KazApi.Controller.Service
                        .Where(e => e.Category == CCodeType.STATE.VALUE);
 
         /// <summary>
-        /// 勝敗結果を記録
+        /// 勝敗結果を記録（モンスター）
         /// </summary>
         public bool InsertBattleResult(
             IEnumerable<MonsterDTO> monsters, DateTime endDate, TimeSpan endTime)
@@ -89,6 +95,32 @@ namespace KazApi.Controller.Service
                 return false;
             }
             return true;
+        }
+
+        /// <summary>
+        /// 勝敗結果を記録（ユーザー）
+        /// </summary>
+        public bool UpdateUserResults(bool hit, int betGil, decimal betRate, string loginId)
+        {
+            try
+            {
+                var param = new
+                {
+                    login_id         = loginId,
+                    wins             = hit ? 1 : 0,
+                    losses           = hit ? 0 : 1,
+                    cash             = hit ? Math.Floor(betGil * betRate) : (-1 * betGil),
+                    wins_get_cash    = hit ? Math.Floor(betGil * betRate) : 0,
+                    losses_lost_cash = hit ? 0 : betGil,
+                };
+                _posgre.Execute(BattleSQL.InsertUserResult(), param);
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

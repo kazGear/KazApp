@@ -27,6 +27,7 @@ namespace KazApi.Controller
         [HttpPost("api/login")]
         public IActionResult Login([FromQuery] string? loginId, [FromQuery] string? password)
         {
+            loginId = loginId.Trim();
             if (loginId == null || password == null) return Unauthorized();
 
             // ユーザの認証
