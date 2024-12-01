@@ -15,7 +15,8 @@ IDatabase _posgre = new PostgreSQL();
 BattleService _service = new BattleService();
 MonsterFactory _monsterFactory = new MonsterFactory();
 
-int battleTimes = 3;
+int battleTimes = 5; // 戦闘回数
+
 for (int i = 0; i < battleTimes; i++)
 {
     try
@@ -27,7 +28,7 @@ for (int i = 0; i < battleTimes; i++)
          */
 
         // モンスターデータ等の読込み
-        IEnumerable<MonsterDTO> monstersFromDB = _service.SelectMonsters();
+        IEnumerable<MonsterDTO> monstersFromDB = _service.SelectMonsters("admin");
         IEnumerable<SkillDTO> skillsFromDB = _service.SelectSkills();
         IEnumerable<MonsterSkillDTO> monsterSkillFromDB = _service.SelectMonsterSkills();
 
@@ -57,7 +58,6 @@ for (int i = 0; i < battleTimes; i++)
         /**
          * 戦闘不能が1人以下になるまで戦う
          */
-
         do
         {
             // 行動順決め
@@ -89,22 +89,14 @@ for (int i = 0; i < battleTimes; i++)
                 me.UpdateStatus(changedStatus);
 
                 // HP 現状確認
-                // Console.Writeline("================================================================");
                 foreach (IMonster monster in battleMonsters)
                 {
                     int hp = monster.Hp > 0 ? monster.Hp : 0;
-                    // Console.Writeline($"name: {monster.MonsterName}, HP: {hp}");
                 }
 
                 // 勝敗判定
                 alives = battleMonsters.Where(e => e.Hp > 0);
                 IMonster? alive = alives.Count() == 1 ? alives.Single() : null;
-
-                //if (alives.Count() == 1)
-                //    Console.Writeline($"Winner: {alive!.MonsterName} !!");
-                //else if (alives.Count() == 0)
-                //    Console.Writeline($"All loser ...");
-
             }
         } while (alives.Count() > 1);
 
@@ -123,11 +115,11 @@ for (int i = 0; i < battleTimes; i++)
 
         Console.WriteLine($"{i + 1}戦目 終了.");
 
-        // 間隔を空け再選（2分ごと、最終回は待たない）
-        if (i < 2)
+        // 間隔を空け再選（1分ごと、最終回は待たない）
+        if (i < battleTimes - 1)
         {
-            // Console.Writeline("再選待ち...(2分)");
-            await Task.Delay(120000);
+            // 再選待ち...(1分)");
+            await Task.Delay(60000);
         }
     }
     catch (Exception e)

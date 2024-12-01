@@ -31,6 +31,16 @@ namespace KazApi.Controller
         }
 
         /// <summary>
+        /// ユーザ情報取得
+        /// </summary>
+        [HttpPost("api/user/userInfo")]
+        public ActionResult<string> SelectUserOne([FromQuery] string loginId)
+        {
+            UserDTO? user = _service.SelectUserOne(loginId);
+            return JsonConvert.SerializeObject(user);
+        }
+
+        /// <summary>
         /// ユーザー登録
         /// </summary>
         [HttpPost("api/user/userRegist")]

@@ -4,6 +4,8 @@ using KazApi.Controller.Service;
 using KazApi.Common._Filter;
 using KazApi.Domain._GameSystem;
 using KazApi.Domain.DTO;
+using System.Composition;
+using System.Collections.Generic;
 
 namespace KazApi.Controller
 {
@@ -50,8 +52,14 @@ namespace KazApi.Controller
                     = _service.SelectMonsterReport(monsterTypeId, sortType, isAscOrder);
 
                 // 勝率を算出
-                IEnumerable<MonsterReportDTO> editedReport
-                    = BattleSystem.ResultsOfMonster(report);
+                IEnumerable<MonsterReportDTO> editedReport = report.Select(e => new MonsterReportDTO
+                {
+                    MonsterId = e.MonsterId,
+                    MonsterName = e.MonsterName,
+                    BattleCount = e.BattleCount,
+                    Wins = e.Wins,
+                    WinRate = (e.Wins / (double)e.BattleCount * 100).ToString("N2") + "%"
+                });
 
                 return JsonConvert.SerializeObject(editedReport);
             }
@@ -78,9 +86,18 @@ namespace KazApi.Controller
                 IEnumerable<BattleReportDTO> battleReports
                     = _service.SelectBattleReport(battleScale, dateFrom, dateTo);
                 
-                IEnumerable<BattleReportDTO> editedReport = BattleSystem.ResultsOfBattle(battleReports);
-                     
-                return JsonConvert.SerializeObject(battleReports);
+                IEnumerable<BattleReportDTO> editedReport = battleReports.Select(e => new BattleReportDTO
+                {
+                    BattleId = e.BattleId,
+                    BattleEndDateStr = e.BattleEndDate.ToString().Substring(0, 10),
+                    BattleEndTimeStr = e.BattleEndTime.ToString().Substring(0, 8),
+                    Serial = e.Serial,
+                    MonsterId = e.MonsterId,
+                    MonsterName = e.MonsterName,
+                    IsWin = e.IsWin
+                });
+
+                return JsonConvert.SerializeObject(editedReport);
             }
             catch (Exception e)
             {

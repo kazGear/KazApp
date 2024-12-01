@@ -6,13 +6,26 @@
     public static class UserSQL
     {
 
-        public static string SelecUsers()
+        public static string SelecUsers(string? aWhere = null)
         {
-            string SQL = @"
-                SELECT login_id        AS LoginId
-                     , disp_name       AS DispName
-                     , disp_short_name AS DispShortName
-                  FROM m_user ;
+            string WHERE = string.Empty;
+            if (aWhere != null) WHERE = aWhere;
+
+            string SQL = @$"
+                SELECT login_id          AS LoginId
+                     , failed_login_cnt  AS FailedLoginCnt
+                     , is_login_disabled AS IsLoginDisabled
+                     , disp_name         AS DispName
+                     , disp_short_name   AS DispShortName
+                     , role              AS Role
+                     , cash              AS Cash
+                     , bankruptcy_cnt    AS BankruptcyCnt
+                     , wins              AS Wins
+                     , wins_get_cash     AS WinsGetCash
+                     , losses            AS Losses
+                     , losses_lost_cash  AS LossesLostCash
+                  FROM m_user 
+                {WHERE} ;
             ";
             return SQL;
         }

@@ -18,13 +18,30 @@ namespace KazApi.Controller.Service
         }
 
         /// <summary>
+        /// ユーザ情報取得
+        /// </summary>
+        public UserDTO? SelectUserOne(string loginId)
+        {
+            var param = new { login_id = loginId };
+          
+            string where = " WHERE login_id = @login_id ";
+
+            return _posgre.Select<UserDTO>(UserSQL.SelecUsers(where), param)
+                          .SingleOrDefault();
+        }
+
+        /// <summary>
         /// 登録済ユーザーを取得
         /// </summary>
         /// <returns></returns>
         public IEnumerable<UserDTO> RegistedSelectUsers()
             => _posgre.Select<UserDTO>(UserSQL.SelecUsers());
 
-        // ユーザー登録
+
+        /// <summary>
+        /// ユーザ登録
+        /// </summary>
+
         public bool InsertUser(
             string LoginId,
             string Password,
@@ -53,6 +70,9 @@ namespace KazApi.Controller.Service
             return true;
         }
 
+        /// <summary>
+        /// ユーザが初期か使えるモンスタを設定する
+        /// </summary>
         public bool InsertStartUpMonsters(string loginId)
         {
             try
