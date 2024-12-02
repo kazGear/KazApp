@@ -33,14 +33,11 @@ namespace KazApi.Controller.Service
         }
 
         /// <summary>
-        /// モンスターデータの読込み
+        /// モンスターデータ取得
         /// </summary>
         public IEnumerable<MonsterDTO> SelectMonsters(string? loginId = null)
         {
-            var param = new
-            {
-                login_id = loginId
-            };
+            var param = new　{ login_id = loginId };
             return _posgre.Select<MonsterDTO>(MonsterSQL.SelectMonsters(), param);
         }
 

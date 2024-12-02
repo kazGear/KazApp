@@ -23,10 +23,8 @@ namespace KazApi.Controller.Service
         public UserDTO? SelectUserOne(string loginId)
         {
             var param = new { login_id = loginId };
-          
-            string where = " WHERE login_id = @login_id ";
 
-            return _posgre.Select<UserDTO>(UserSQL.SelecUsers(where), param)
+            return _posgre.Select<UserDTO>(UserSQL.SelecUsers(loginId), param)
                           .SingleOrDefault();
         }
 

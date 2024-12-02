@@ -10,9 +10,6 @@ using KazApi.Domain._Const;
 using KazApi.Domain.DTO;
 using Microsoft.CodeAnalysis;
 
-
-
-
 namespace KazApi.Controller
 {
     [ApiController]
@@ -27,6 +24,23 @@ namespace KazApi.Controller
             _logger = new BattleLogger();
             _service = new BattleService(configuration);
             _monsterFactory = new MonsterFactory();
+        }
+
+        /// <summary>
+        /// モンスター情報
+        /// </summary>
+        [HttpPost("api/battle/monstersInfo")]
+        public ActionResult<string> MonstersInfo(string loginId)
+        {
+            try
+            {
+                IEnumerable<MonsterDTO> monsters = _service.SelectMonsters(loginId);
+                return JsonConvert.SerializeObject(monsters);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
         }
 
         /// <summary>

@@ -6,10 +6,9 @@
     public static class UserSQL
     {
 
-        public static string SelecUsers(string? aWhere = null)
+        public static string SelecUsers(string? loginId = null)
         {
-            string WHERE = string.Empty;
-            if (aWhere != null) WHERE = aWhere;
+            string WHERE = loginId != null ? " WHERE login_id = @login_id " : "";
 
             string SQL = @$"
                 SELECT login_id          AS LoginId
