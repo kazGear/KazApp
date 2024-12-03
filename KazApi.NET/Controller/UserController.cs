@@ -4,6 +4,7 @@ using KazApi.Controller.Service;
 using KazApi.Repository;
 using KazApi.Repository.sql;
 using KazApi.Domain.DTO;
+using NuGet.Protocol;
 
 namespace KazApi.Controller
 {
@@ -73,6 +74,9 @@ namespace KazApi.Controller
             }
         }
 
+        /// <summary>
+        /// ログインユーザ情報を取得
+        /// </summary>
         [HttpPost("api/user/loginUser")]
         public ActionResult<string?> SelectUser([FromQuery] string? loginId)
         {
@@ -84,5 +88,27 @@ namespace KazApi.Controller
             string? result = user?.DispName;
             return JsonConvert.SerializeObject(result);
         }
+
+        /// <summary>
+        /// 自己破産（所持金初期化）
+        /// </summary>
+        [HttpPost("api/user/restartAsPlayer")]
+        public ActionResult<string> RestartAsPlayer([FromQuery] string loginId)
+        {
+            try
+            {
+                _service.RestartAsPlayer(loginId);
+
+                UserDTO? user = _service.SelectUserOne(loginId);
+                return JsonConvert.SerializeObject(user);
+
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+            
+        }
+
     }
 }

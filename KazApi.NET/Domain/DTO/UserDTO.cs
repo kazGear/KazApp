@@ -9,6 +9,7 @@
         public string DispName { get; set; }
         public string DispShortName { get; set; }
         public int Role { get; set; }
+        public string RoleName { get; set; }
         public int Cash { get; set; }
         public int Wins { get; set; }
         public int WinsGetCash { get; set; }

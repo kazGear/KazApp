@@ -95,5 +95,15 @@ namespace KazApi.Controller.Service
             }
             return true;
         }
+
+        /// <summary>
+        /// 自己破産（所持金初期化）
+        /// </summary>
+        /// <returns></returns>
+        public void RestartAsPlayer(string loginId)
+        {
+            var param = new { login_id = loginId };
+            _posgre.Execute(UserSQL.RestartAsPlayer(), param);
+        }
     }
 }

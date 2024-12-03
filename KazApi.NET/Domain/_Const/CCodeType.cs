@@ -34,5 +34,9 @@
         ///// モンスター
         ///// </summary>
         public static readonly CCodeType MONSTER = new(6, "MONSTER");
+        ///// <summary>
+        ///// ロール
+        ///// </summary>
+        public static readonly CCodeType ROLE = new(7, "ROLE");
     }
 }

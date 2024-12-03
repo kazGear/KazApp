@@ -1,4 +1,6 @@
-﻿namespace KazApi.Repository.sql
+﻿using KazApi.Domain._Const;
+
+namespace KazApi.Repository.sql
 {
     /// <summary>
     /// SQL文格納クラス
@@ -11,19 +13,23 @@
             string WHERE = loginId != null ? " WHERE login_id = @login_id " : "";
 
             string SQL = @$"
-                SELECT login_id          AS LoginId
-                     , failed_login_cnt  AS FailedLoginCnt
-                     , is_login_disabled AS IsLoginDisabled
-                     , disp_name         AS DispName
-                     , disp_short_name   AS DispShortName
-                     , role              AS Role
-                     , cash              AS Cash
-                     , bankruptcy_cnt    AS BankruptcyCnt
-                     , wins              AS Wins
-                     , wins_get_cash     AS WinsGetCash
-                     , losses            AS Losses
-                     , losses_lost_cash  AS LossesLostCash
-                  FROM m_user 
+                SELECT u.login_id          AS LoginId
+                     , u.failed_login_cnt  AS FailedLoginCnt
+                     , u.is_login_disabled AS IsLoginDisabled
+                     , u.disp_name         AS DispName
+                     , u.disp_short_name   AS DispShortName
+                     , u.role              AS Role
+                     , c.name              AS RoleName
+                     , u.cash              AS Cash
+                     , u.bankruptcy_cnt    AS BankruptcyCnt
+                     , u.wins              AS Wins
+                     , u.wins_get_cash     AS WinsGetCash
+                     , u.losses            AS Losses
+                     , u.losses_lost_cash  AS LossesLostCash
+                  FROM m_user AS u
+            INNER JOIN m_code AS c
+                    ON u.role = c.value
+                   AND c.category = {CCodeType.ROLE.VALUE}
                 {WHERE} ;
             ";
             return SQL;
@@ -71,6 +77,17 @@
                     @acquired_date,
                     @not_use_this
                 ) ;
+            ";
+            return SQL;
+        }
+
+        public static string RestartAsPlayer()
+        {
+            string SQL = @"
+                UPDATE m_user
+                   SET cash = 5000
+                     , bankruptcy_cnt = bankruptcy_cnt + 1
+                WHERE login_id = @login_id ;
             ";
             return SQL;
         }
