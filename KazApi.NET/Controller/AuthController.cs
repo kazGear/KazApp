@@ -24,7 +24,7 @@ namespace KazApi.Controller
         /// <summary>
         /// ログイン実行
         /// </summary>
-        [HttpPost("api/login")]
+        [HttpPost("api/auth/login")]
         public IActionResult Login([FromQuery] string? loginId, [FromQuery] string? password)
         {
             loginId = loginId != null ? loginId.Trim() : null; 
@@ -46,7 +46,7 @@ namespace KazApi.Controller
         /// <summary>
         /// トークンが有効か確認する
         /// </summary>
-        [HttpPost("api/checkToken")]
+        [HttpPost("api/auth/checkToken")]
         public IActionResult IsValidToken([FromQuery] string token)
         {
             if (token == null || token == "null") return Ok(false);
