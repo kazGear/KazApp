@@ -26,6 +26,7 @@ namespace KazApi.Repository.sql
                      , u.wins_get_cash     AS WinsGetCash
                      , u.losses            AS Losses
                      , u.losses_lost_cash  AS LossesLostCash
+                     , u.user_image        AS UserImage
                   FROM m_user AS u
             INNER JOIN m_code AS c
                     ON u.role = c.value
@@ -38,7 +39,8 @@ namespace KazApi.Repository.sql
         public static string SelectLoginUser()
         {
             string SQL = @"
-                SELECT disp_name AS DispName
+                SELECT disp_name  AS DispName
+                     , user_image AS UserImage
                   FROM m_user
                  WHERE login_id = @login_id ;
             ";
@@ -87,6 +89,16 @@ namespace KazApi.Repository.sql
                 UPDATE m_user
                    SET cash = 5000
                      , bankruptcy_cnt = bankruptcy_cnt + 1
+                WHERE login_id = @login_id ;
+            ";
+            return SQL;
+        }
+
+        public static string UpdateUserImage()
+        {
+            string SQL = @"
+                UPDATE m_user
+                   SET user_image = @image
                 WHERE login_id = @login_id ;
             ";
             return SQL;

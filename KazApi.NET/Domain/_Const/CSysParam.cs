@@ -9,7 +9,7 @@
         /// コンストラクタ
         /// </summary>
         private CEnvironment(bool value, string name) : base(value, name) { }
-
+       
         /// <summary>
         /// 開発、ローカル環境
         /// </summary>
@@ -24,6 +24,33 @@
         /// </summary>
         public static readonly CEnvironment THIS_ENVIRONMENT = DEVELOPMENT;
         //public static readonly CEnvironment THIS_ENVIRONMENT = PRODUCTION;
+    }
+
+    public class CFilePath : Enumeration<string>
+    {
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        private CFilePath(string value, string name) : base(value, name) { }
+
+        /// <summary>
+        /// ユーザーイメージ保管場所
+        /// </summary>
+        public static readonly CFilePath USER_IMAGES = new("Domain/_User/_Images", "USER_IMAGES");
+    }
+
+    public class CPrefix : Enumeration<string>
+    {
+        //data:image/jpeg;base64,
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        private CPrefix(string value, string name) : base(value, name) { }
+
+        /// <summary>
+        /// ユーザーイメージ保管場所
+        /// </summary>
+        public static readonly CPrefix BASE64 = new("data:image/jpeg;base64,", "BASE64");
     }
 
     /// <summary>

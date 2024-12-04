@@ -9,6 +9,7 @@ namespace KazApi.Controller.Service
     public class UserService
     {
         private readonly IDatabase _posgre;
+
         /// <summary>
         /// コンストラクタ
         /// </summary>

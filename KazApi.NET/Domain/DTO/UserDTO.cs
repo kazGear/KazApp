@@ -16,5 +16,6 @@
         public int Losses { get; set; }
         public int BankruptcyCnt { get; set; }
         public int LossesLostCash { get; set; }
+        public string UserImage { get; set; }
     }
 }

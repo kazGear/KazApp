@@ -43,4 +43,9 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\_Img\" />
+    <Folder Include="Domain\_User\_Images\" />
+  </ItemGroup>
+
 </Project>

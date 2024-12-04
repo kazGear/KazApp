@@ -4,7 +4,6 @@ using KazApi.Controller.Service;
 using KazApi.Repository;
 using KazApi.Repository.sql;
 using KazApi.Domain.DTO;
-using NuGet.Protocol;
 
 namespace KazApi.Controller
 {
@@ -85,8 +84,7 @@ namespace KazApi.Controller
             UserDTO? user = _posgre.Select<UserDTO>(UserSQL.SelectLoginUser(), param)
                                    .SingleOrDefault();
 
-            string? result = user?.DispName;
-            return JsonConvert.SerializeObject(result);
+            return JsonConvert.SerializeObject(user);
         }
 
         /// <summary>
@@ -109,6 +107,5 @@ namespace KazApi.Controller
             }
             
         }
-
     }
 }
