@@ -103,5 +103,23 @@ namespace KazApi.Repository.sql
             ";
             return SQL;
         }
+
+        public static string SelectMonsterCount()
+        {
+            string SQL = @"
+                SELECT count(u.login_id)                AS Param1
+                    , (
+                        SELECT count(*) FROM m_monster
+                      )                                 AS Param2
+                  FROM m_user AS u
+            INNER JOIN m_usable_monster_types AS umt
+                    ON umt.login_id = u.login_id
+            INNER JOIN m_monster AS m
+                    ON m.monster_type = umt .monster_type_id
+                 WHERE u.login_id = @login_id
+              GROUP BY u.login_id ;
+            ";
+            return SQL;
+        }
     }
 }

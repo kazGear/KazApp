@@ -107,5 +107,15 @@ namespace KazApi.Controller
             }
             
         }
+
+        /// <summary>
+        /// 使用可能なモンスター数を取得
+        /// </summary>
+        [HttpPost("api/user/getMonsterCount")]
+        public ActionResult<string> SelectMonsterCount([FromQuery] string loginId)
+        {
+            LittleDTO<int> result = _service.SelectMonsterCount(loginId);
+            return JsonConvert.SerializeObject($"{result.Param1} / {result.Param2}");
+        }
     }
 }

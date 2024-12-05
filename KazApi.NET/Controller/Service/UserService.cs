@@ -106,5 +106,18 @@ namespace KazApi.Controller.Service
             var param = new { login_id = loginId };
             _posgre.Execute(UserSQL.RestartAsPlayer(), param);
         }
+
+        /// <summary>
+        /// 使用可能なモンスター数を取得
+        /// </summary>
+        public LittleDTO<int> SelectMonsterCount(string loginId)
+        {
+            var param = new { login_id = loginId };
+
+            LittleDTO<int> result =_posgre.Select<LittleDTO<int>>(UserSQL.SelectMonsterCount(), param)
+                                          .Single();
+            return result;
+        }
+
     }
 }
