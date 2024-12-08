@@ -1,9 +1,6 @@
 ﻿using CSLib.Lib;
 using KazApi.Controller.Service;
-using KazApi.Domain._Const;
-using KazApi.Domain._User;
 using Microsoft.AspNetCore.Mvc;
-using System.IO;
 
 
 namespace KazApi.Controller

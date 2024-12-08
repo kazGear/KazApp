@@ -30,7 +30,7 @@ namespace KazApi.Repository.sql
                   FROM m_user AS u
             INNER JOIN m_code AS c
                     ON u.role = c.value
-                   AND c.category = {CCodeType.ROLE.VALUE}
+                   AND c.code_id = '{CCodeType.ROLE.VALUE}'
                 {WHERE} ;
             ";
             return SQL;

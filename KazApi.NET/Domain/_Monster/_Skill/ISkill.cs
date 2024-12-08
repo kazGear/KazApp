@@ -14,7 +14,7 @@ namespace KazApi.Domain._Monster._Skill
         protected readonly ILog<BattleMetaData> _Log = new BattleLogger();
         protected int _initialAttack;
 
-        public int SkillId { get; protected set; }
+        public string SkillId { get; protected set; }
         public string SkillName { get; protected set; }
         public int SkillType { get; protected set; }
         public int Attack { get; protected set; }

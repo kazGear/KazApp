@@ -9,7 +9,7 @@ namespace KazApi.Domain.DTO
     public class SkillDTO
     {
         [JsonPropertyName("SkillId")]
-        public int SkillId { get; set; }
+        public string SkillId { get; set; }
         [JsonPropertyName("SkillName")]
         public string SkillName { get; set; }
         [JsonPropertyName("SkillType")]

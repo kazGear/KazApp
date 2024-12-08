@@ -2,8 +2,8 @@
 {
     public class MonsterSkillDTO
     {
-        public int MonsterId;
-        public int SkillId;
+        public string MonsterId;
+        public string SkillId;
         public bool Disabled;
     }
 }

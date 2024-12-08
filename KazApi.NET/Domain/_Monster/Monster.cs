@@ -12,7 +12,7 @@ namespace KazApi.Domain._Monster
     /// </summary>
     public class Monster : IMonster
     {
-        private static readonly int TARGET_NONE = 0;
+        private static readonly string TARGET_NONE = string.Empty;
 
         /// <summary>
         /// コンストラクタ

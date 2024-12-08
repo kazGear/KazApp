@@ -5,7 +5,7 @@
     /// </summary>
     public class CodeDTO
     {
-        public int Category;
+        public string CodeId;
         public int Value;
         public string Name;
         public string Param1;

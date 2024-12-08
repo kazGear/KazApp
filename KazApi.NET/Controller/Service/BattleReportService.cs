@@ -26,7 +26,7 @@ namespace KazApi.Controller.Service
             {
                 object parameter = new
                 {
-                    category = CCodeType.MONSTER.VALUE
+                    code_id = CCodeType.MONSTER.VALUE
                 };
                 string sql = ReportSQL.SelectMonsterTypes();
 

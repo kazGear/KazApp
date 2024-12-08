@@ -11,7 +11,7 @@ namespace KazApi.Common._Log
     {
         private static readonly int NONE = 0;
         [JsonPropertyName("TargetMonsterId")]
-        public readonly int TargetMonsterId = NONE;
+        public readonly string TargetMonsterId = string.Empty;
         [JsonPropertyName("BeforeHp")]
         public readonly int BeforeHp = NONE;
         [JsonPropertyName("ImpactPoint")]
@@ -23,7 +23,7 @@ namespace KazApi.Common._Log
         [JsonPropertyName("DisableState")]
         public readonly bool DisableState = false;
         [JsonPropertyName("SkillId")]
-        public readonly int SkillId = NONE;
+        public readonly string SkillId = string.Empty;
         [JsonPropertyName("Message")]
         public readonly string Message = string.Empty;
         [JsonPropertyName("IsStop")]
@@ -33,7 +33,7 @@ namespace KazApi.Common._Log
         [JsonPropertyName("ExistWinner")]
         public readonly bool ExistWinner = false;
         [JsonPropertyName("WinnerMonsterId")]
-        public readonly int WinnerMonsterId = NONE;
+        public readonly string WinnerMonsterId = string.Empty;
         [JsonPropertyName("WinnerMonsterName")]
         public readonly string WinnerMonsterName = NONE.ToString();
 
@@ -58,7 +58,7 @@ namespace KazApi.Common._Log
         /// コンストラクタ
         /// </summary>
         public BattleMetaData(
-            int targetMonsterId,
+            string targetMonsterId,
             string message,
             bool isStop = false)
         {
@@ -66,12 +66,25 @@ namespace KazApi.Common._Log
             Message = message;
             IsStop = isStop;
         }
-
         /// <summary>
         /// コンストラクタ
         /// </summary>
         public BattleMetaData(
-            int targetMonsterId,
+            string targetMonsterId,
+            string skillId,
+            string message,
+            bool isStop = false)
+        {
+            TargetMonsterId = targetMonsterId;
+            SkillId = skillId;
+            Message = message;
+            IsStop = isStop;
+        }
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public BattleMetaData(
+            string targetMonsterId,
             bool disableState,
             string stateName,
             string message,
@@ -84,27 +97,13 @@ namespace KazApi.Common._Log
             IsStop = isStop;
         }
 
-        /// <summary>
-        /// コンストラクタ
-        /// </summary>
-        public BattleMetaData(
-            int targetMonsterId,
-            int skillId,
-            string message,
-            bool isStop = false)
-        {
-            TargetMonsterId = targetMonsterId;
-            SkillId = skillId;
-            Message = message;
-            IsStop = isStop;
-        }
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
         public BattleMetaData(
-            int targetMonsterId,
-            int skillId,
+            string targetMonsterId,
+            string skillId,
             string stateName,
             bool enableState,
             string message,
@@ -122,7 +121,7 @@ namespace KazApi.Common._Log
         /// コンストラクタ
         /// </summary>
         public BattleMetaData(
-            int targetMonsterId,
+            string targetMonsterId,
             int beforeHp,
             int impactPoint,
             string message,
@@ -138,10 +137,10 @@ namespace KazApi.Common._Log
         /// コンストラクタ
         /// </summary>
         public BattleMetaData(
-            int targetMonsterId,
+            string targetMonsterId,
             int beforeHp,
             int impactPoint,
-            int skillId,
+            string skillId,
             string message,
             bool isStop = false)
         {

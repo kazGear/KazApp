@@ -8,7 +8,7 @@
         public static string SelectCode()
         {
             string SQL = @"
-                SELECT category AS Category
+                SELECT code_id  AS CodeId
                      , value    AS Value
                      , name     AS Name
                      , param1   AS Param1

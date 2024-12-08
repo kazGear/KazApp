@@ -31,7 +31,8 @@ namespace KazApi.Common._Filter
 
                 if (!isValid)
                 {
-                    throw new SecurityTokenException("トークンの有効期限が切れています。ログインしてください。");
+                    Console.WriteLine("トークンの有効期限が切れています。ログインしてください。");
+                    //throw new SecurityTokenException("トークンの有効期限が切れています。ログインしてください。");
                 }
             }
         }

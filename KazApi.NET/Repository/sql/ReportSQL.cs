@@ -13,7 +13,7 @@ namespace KazApi.Repository.sql
                 SELECT value AS MonsterTypeId
                      , name  AS MonsterTypeName
                   FROM m_code
-                 WHERE category = @category
+                 WHERE code_id = @code_id
               ORDER BY MonsterTypeName ASC
             ";
             return SQL;

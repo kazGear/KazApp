@@ -6,8 +6,8 @@ namespace KazApi.Domain.DTO
 {
     public class StateDTO
     {
-        [JsonPropertyName("Category")]
-        public int Category { get; set; }
+        [JsonPropertyName("CodeId")]
+        public string CodeId { get; set; }
         [JsonPropertyName("StateType")]
         public int StateType { get; set; }
         [JsonPropertyName("Name")]
@@ -27,7 +27,7 @@ namespace KazApi.Domain.DTO
         /// </summary>
         public StateDTO(IState model)
         {
-            Category = CCodeType.STATE.VALUE;
+            CodeId = CCodeType.STATE.VALUE;
             StateType = model.StateType;
             Name = model.Name;
             MaxDuration = model.MaxDuration;

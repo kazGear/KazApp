@@ -22,7 +22,7 @@
                          + sum(s.weight) * 20
                          + sum(s.critical * 100) AS BetScore
                   FROM m_monster AS m 
-            INNER JOIN m_monster_skill AS ms
+            INNER JOIN m_my_skills AS ms
                     ON ms.monster_id = m.monster_id 
             INNER JOIN m_skill AS s
                     ON s.skill_id = ms.skill_id
@@ -45,7 +45,7 @@
                     SELECT monster_id AS MonsterId
                          , skill_id   AS SkillId 
                          , disabled   AS Disabled
-                      FROM m_monster_skill ;
+                      FROM m_my_skills ;
                 ";
             return SQL;
         }

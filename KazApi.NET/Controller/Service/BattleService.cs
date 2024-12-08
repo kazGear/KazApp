@@ -55,7 +55,7 @@ namespace KazApi.Controller.Service
 
         public IEnumerable<CodeDTO> SelectStateCode()
             => _posgre.Select<CodeDTO>(CodeSQL.SelectCode())
-                       .Where(e => e.Category == CCodeType.STATE.VALUE);
+                       .Where(e => e.CodeId == CCodeType.STATE.VALUE);
 
         /// <summary>
         /// 勝敗結果を記録（モンスター）

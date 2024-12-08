@@ -83,7 +83,7 @@ namespace KazApi.Controller
             catch (Exception e)
             {
                 return e.Message;
-            }           
+            }
         }
 
         /// <summary>
@@ -156,15 +156,19 @@ namespace KazApi.Controller
         /// </summary>
         [HttpPost("api/user/recordUserResults")]
         public ActionResult<bool> RecordUserResults(
-            [FromQuery] int betMonsterId,
+            [FromQuery] string betMonsterId,
             [FromQuery] int betGil,
             [FromQuery] decimal betRate,
-            [FromQuery] int winningMonsterId,
+            [FromQuery] string winningMonsterId,
             [FromQuery] string loginId)
         {
             try
             {
-                if (winningMonsterId <= 0) return false;
+                if (string.IsNullOrEmpty(winningMonsterId)) return false;
+                
+                loginId = loginId.Trim();
+                betMonsterId = betMonsterId.Trim();
+                winningMonsterId = winningMonsterId.Trim();
 
                 bool hit = false;
                 if (betMonsterId == winningMonsterId) hit = true;

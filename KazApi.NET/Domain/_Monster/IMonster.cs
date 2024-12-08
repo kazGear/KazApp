@@ -16,7 +16,7 @@ namespace KazApi.Domain._Monster
         protected IList<ISkill> _skills = new List<ISkill>();
         protected int _defaultAttack;
 
-        public int MonsterId { get; protected set; }
+        public string MonsterId { get; protected set; }
         public string MonsterName { get; protected set; }
         public int MonsterType { get; protected set; }
         public int Hp { get; protected set; }
